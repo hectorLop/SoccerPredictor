@@ -21,3 +21,11 @@
 .pytest_cache/
 __pycache__/
 .env
+
+## Jupyter notebooks ##
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+## IPython ##
+profile_default/
+ipython_config.py
