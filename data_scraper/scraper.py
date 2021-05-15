@@ -8,7 +8,24 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Firefox
 
-class WebScraper():
+class SeleniumWebScraper():
+    """
+    This class models a web scraper using Selenium
+
+    Parameters
+    ----------
+    config_file : str
+        Configuration file path
+    driver_path : str
+        Selenium driver path. Default is 'geckodriver' by PATH access.
+
+    Attributes
+    ----------
+    _webdriver : object
+        Selenium webdriver.
+    _config : dict
+        Dictionary containing the scraper configuration.
+    """
     def __init__(self, config_file: str, driver_path: str = 'geckodriver') -> None:
         self._webdriver = self._create_webdriver(driver_path)
         self._config = self._get_config_from_yaml(config_file)
@@ -30,18 +47,71 @@ class WebScraper():
         return driver
 
     def _get_config_from_yaml(self, config_file: str):
+        """
+        Gets the scraper configuration from the config yaml file.
+
+        Parameters
+        ----------
+        config_file : str
+            Configuration YAML file path
+        
+        Returns
+        -------
+        config : dict
+            Dictionary containing the YAML information
+        """
         with open(config_file) as file:
             config = yaml.load(file, Loader=yaml.FullLoader)
 
         return config
     
     def get_matches_data(self):
+        """
+        Gets the matches related data.
+
+        Returns
+        -------
+        data : List[Tuple]
+            List containing a tuple for each match
+        """
         scraper = MatchesDataScraper(self._webdriver, self._config['matches_data'])
         data = scraper.get_data()
         
         return data
 
+    def get_ranks_data(self):
+        """
+        Gets the ranking related data.
+
+        Returns
+        -------
+        data : List[Tuple]
+            List containing a tuple for each team.
+        """
+        scraper = RanksDataScraper(self._webdriver, self._config['ranks_data'])
+        data = scraper.get_data()
+
+        return data
+
 class DataScraper(ABC):
+    """
+    Abstract class which defines the interface for a scraper 
+    of the https://www.resultados-futbol.com webpage
+
+    Parameters
+    ----------
+    webdriver : object
+        Selenium webdriver
+    data_config : dict
+        Dictionary containing the information to retrieve the requested data
+
+    Attributes
+    ----------
+    _webdriver : object
+        Selenium webdriver
+    _config : dict
+        Dictionary containing the information to retrieve the requested data
+    """
     def __init__(self, webdriver: Firefox, data_config: Dict) -> None:
         self._webdriver = webdriver
         self._config = data_config
@@ -207,6 +277,12 @@ class RanksDataScraper(DataScraper):
                 self._webdriver.get(url)
 
                 raw_teams_data = self._retrieve_raw_teams_ranking_data()
+                teams_info = self._get_teams_info(raw_teams_data)
+
+                for info in teams_info:
+                    full_ranks_data.append((season, league_match, *info))
+
+        return full_ranks_data
 
     def _retrieve_raw_teams_ranking_data(self):
         # HTML element containing the ranking
@@ -242,7 +318,7 @@ class RanksDataScraper(DataScraper):
             
             team_name = team.find_element_by_class_name('equipo').text
             
-            win_streak, draw_streak, loss_streak = get_streaks(team)
+            win_streak, draw_streak, loss_streak = self._get_teams_streaks(team)
             
             teams_info.append((rank, team_name, home_wins, away_wins, home_losses, away_losses, home_draws, away_draws,
                             goals_scored, goals_conceded, win_streak, draw_streak, loss_streak))
@@ -263,7 +339,7 @@ class RanksDataScraper(DataScraper):
             else:
                 streak.append('D')
         
-        streaks = self.compute_streak(streak)
+        streaks = self._compute_streak(streak)
         
         return streaks['W'], streaks['D'], streaks['L']
         
