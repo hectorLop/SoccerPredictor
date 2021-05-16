@@ -1,0 +1,194 @@
+1621074663055	geckodriver	INFO	Listening on 127.0.0.1:43235
+1621074664062	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilezTqclf"
+*** You are running in headless mode.
+
+(firefox:11156): Gtk-WARNING **: 12:31:04.093: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:11211): GLib-GObject-CRITICAL **: 12:31:04.920: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:11232): GLib-GObject-CRITICAL **: 12:31:05.043: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621074665645	Marionette	INFO	Listening on port 33003
+1621074665700	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:11311): GLib-GObject-CRITICAL **: 12:31:05.925: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1621074669624	geckodriver	INFO	Listening on 127.0.0.1:45801
+1621074670631	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilebAy6X6"
+*** You are running in headless mode.
+
+(firefox:11341): Gtk-WARNING **: 12:31:10.663: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:11395): GLib-GObject-CRITICAL **: 12:31:11.554: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:11417): GLib-GObject-CRITICAL **: 12:31:11.701: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621074672149	Marionette	INFO	Listening on port 32823
+1621074672266	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:11500): GLib-GObject-CRITICAL **: 12:31:12.631: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1621074693282	geckodriver	INFO	Listening on 127.0.0.1:54221
+1621074694288	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileyMJdm6"
+*** You are running in headless mode.
+
+(firefox:11552): Gtk-WARNING **: 12:31:34.321: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:11606): GLib-GObject-CRITICAL **: 12:31:35.240: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:11627): GLib-GObject-CRITICAL **: 12:31:35.385: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621074695938	Marionette	INFO	Listening on port 40561
+1621074696125	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:11706): GLib-GObject-CRITICAL **: 12:31:36.259: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1621075098014	geckodriver	INFO	Listening on 127.0.0.1:57901
+1621075099019	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileuHjB9x"
+*** You are running in headless mode.
+
+(firefox:12000): Gtk-WARNING **: 12:38:19.045: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:12054): GLib-GObject-CRITICAL **: 12:38:19.876: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:12075): GLib-GObject-CRITICAL **: 12:38:19.998: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621075100432	Marionette	INFO	Listening on port 34989
+1621075100555	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:12155): GLib-GObject-CRITICAL **: 12:38:20.909: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+1621075153182	geckodriver	INFO	Listening on 127.0.0.1:57773
+1621075154188	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileIrF4HN"
+*** You are running in headless mode.
+
+(firefox:12263): Gtk-WARNING **: 12:39:14.218: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:12317): GLib-GObject-CRITICAL **: 12:39:15.042: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:12338): GLib-GObject-CRITICAL **: 12:39:15.161: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621075155832	Marionette	INFO	Listening on port 34427
+1621075155966	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:12417): GLib-GObject-CRITICAL **: 12:39:16.058: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+1621075196795	geckodriver	INFO	Listening on 127.0.0.1:49511
+1621075197802	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileKvhxoj"
+*** You are running in headless mode.
+
+(firefox:12526): Gtk-WARNING **: 12:39:57.834: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:12581): GLib-GObject-CRITICAL **: 12:39:58.639: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:12602): GLib-GObject-CRITICAL **: 12:39:58.775: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621075199198	Marionette	INFO	Listening on port 35707
+1621075199222	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:12685): GLib-GObject-CRITICAL **: 12:39:59.673: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada2, line 4805: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada3, line 5051: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada4, line 5603: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada5, line 5725: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada6, line 5944: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada7, line 5768: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada8, line 5944: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada9, line 5768: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada10, line 5864: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada11, line 5686: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada12, line 5544: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada13, line 5508: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada14, line 5604: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada15, line 5542: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada16, line 6008: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada17, line 5864: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada18, line 5768: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada19, line 5652: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+1621075658847	geckodriver	INFO	Listening on 127.0.0.1:54799
+1621075659854	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilelU4ldK"
+*** You are running in headless mode.
+
+(firefox:13228): Gtk-WARNING **: 12:47:39.885: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(/usr/lib/firefox/firefox:13282): GLib-GObject-CRITICAL **: 12:47:40.744: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/usr/lib/firefox/firefox:13303): GLib-GObject-CRITICAL **: 12:47:40.879: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1621075661428	Marionette	INFO	Listening on port 41757
+1621075661484	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/usr/lib/firefox/firefox:13387): GLib-GObject-CRITICAL **: 12:47:41.732: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada2, line 4805: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada3, line 5051: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada4, line 5603: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada5, line 5725: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada6, line 5944: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada7, line 5768: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada8, line 5944: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada9, line 5768: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada10, line 5864: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada11, line 5686: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada12, line 5544: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada13, line 5508: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada14, line 5604: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada15, line 5542: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada16, line 6008: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada17, line 5864: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada18, line 5768: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada19, line 5652: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada20, line 5702: TypeError: document.getElementById(...) is null
+JavaScript error: https://www.resultados-futbol.com/primera1999/grupo1/jornada1, line 4535: TypeError: document.getElementById(...) is null
+1621077361404	Marionette	INFO	Stopped listening on port 40561
+1621077361449	Marionette	INFO	Stopped listening on port 34427
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A00E8,name=PContent::Msg_GraphicsError) Channel error: cannot send/recv
+
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A00E8,name=PContent::Msg_GraphicsError) Channel error: cannot send/recv
+
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+Exiting due to channel error.
