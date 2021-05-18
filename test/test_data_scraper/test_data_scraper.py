@@ -7,7 +7,7 @@ def test_data_scraper_get_matches_data():
 
     data = scraper.get_matches_data()
 
-    assert len(data) != 0, 'Data retrieved is empty'
+    assert len(data) == 200, 'Data retrieved is empty'
     assert data[0][0] == 1999
 
 def test_data_scraper_get_ranks_data():
@@ -15,5 +15,5 @@ def test_data_scraper_get_ranks_data():
 
     data = scraper.get_ranks_data()
 
-    assert len(data) != 0, 'Data retrieved is empty'
+    assert len(data) == 200, 'Data retrieved is empty'
     assert data[0][0] == 1999

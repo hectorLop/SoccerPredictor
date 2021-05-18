@@ -264,10 +264,35 @@ class MatchesDataScraper(DataScraper):
             return 'draw'
 
 class RanksDataScraper(DataScraper):
+    """
+    Scraper to retrieve league ranking related data.
+
+    Parameters
+    ----------
+    webdriver : selenium.webdriver.Firefox
+        Firefox selenium webdriver
+    matches_data_config : dict
+        Dictionary containing the scraper's config
+
+    Attributes
+    ----------
+    _webdriver : selenium.webdriver.Firefox
+        Firefox selenium webdriver
+    _config : dict
+        Dictionary containing the scraper's config
+    """
     def __init__(self, webdriver: Firefox, data_config: Dict) -> None:
         super().__init__(webdriver, data_config)
 
     def get_data(self):
+        """
+        Gets the league ranking related data
+
+        Returns
+        -------
+        full_ranks_data : List[Tuple]
+            List containing a tuple for each league ranking entry
+        """
         full_ranks_data = []
 
         for season in range(self._config['starter_season'], self._config['end_season'] + 1):
@@ -276,7 +301,9 @@ class RanksDataScraper(DataScraper):
                 url = self._config['url'].format(season, league_match)      
                 self._webdriver.get(url)
 
+                # Gets the raw data
                 raw_teams_data = self._retrieve_raw_teams_ranking_data()
+                # Preprocess the raw data to obtain teams info
                 teams_info = self._get_teams_info(raw_teams_data)
 
                 for info in teams_info:
@@ -285,6 +312,14 @@ class RanksDataScraper(DataScraper):
         return full_ranks_data
 
     def _retrieve_raw_teams_ranking_data(self):
+        """
+        Gets the teams ranking data in its raw form.
+
+        Returns
+        -------
+        teams_data : object
+            Team's data
+        """
         # HTML element containing the ranking
         ranking_element = self._webdriver.find_element_by_id('clasificacion')
 
@@ -295,10 +330,23 @@ class RanksDataScraper(DataScraper):
     
         return teams_data
 
-    def _get_teams_info(self, teams):
+    def _get_teams_info(self, teams_data: object):
+        """
+        Retrieve each team's info from the teams data
+
+        Parameters
+        ----------
+        teams_data : Object
+            Object containing the teams raw data for each team
+
+        Returns
+        -------
+        teams_info : list
+            List containing the ranking info for each team
+        """
         teams_info = []
         
-        for team in teams:
+        for team in teams_data:
             wins = team.find_element_by_class_name('win')
             home_wins = wins.get_attribute('data-home')
             away_wins = wins.get_attribute('data-away')
@@ -325,8 +373,22 @@ class RanksDataScraper(DataScraper):
         
         return teams_info
 
-    def _get_teams_streaks(self, team):
-        icons = team.find_elements_by_class_name('tooltip.left.form-icon')
+    def _get_teams_streaks(self, team_info: object):
+        """
+        Get a team's streak information from a certain league match
+
+        Parameters
+        ----------
+        team_info : object
+            Object containing the streaks team information
+
+        Returns
+        -------
+        tuple of int
+            Tuple containing the wins, draws and losses streak for
+            a certain team
+        """
+        icons = team_info.find_elements_by_class_name('tooltip.left.form-icon')
         streak = []
         
         for s in icons[::-1]:
@@ -343,7 +405,20 @@ class RanksDataScraper(DataScraper):
         
         return streaks['W'], streaks['D'], streaks['L']
         
-    def _compute_streak(self, streak):
+    def _compute_streak(self, streak: List):
+        """
+        Computes the team streaks from the icons frequency
+
+        Parameters
+        ----------
+        streak : list of strings
+            List containing the last team results
+
+        Returns
+        -------
+        streaks : dict
+            Dictionary containing the winning, draws and losses streaks.
+        """
         streaks = {
             'W': 0,
             'D': 0,
