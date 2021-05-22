@@ -1,3 +1,4 @@
+from typing import Dict
 import pandas as pd
 import numpy as np
 
@@ -46,3 +47,30 @@ class RemoveSpecialCharacters():
             Cleaned word
         """
         return word.strip(self._characters)
+
+class RemoveFirstLeagueMatch():
+    """
+    Removes the first league match from each season due it does not have
+    any related statistics
+    """
+    def __init__(self) -> None:
+        pass
+
+    def __call__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        # Exclude rows where the league_match is 1
+        dataframe = dataframe[~(dataframe['league_match'] == 1)]
+
+        return dataframe
+
+class RenameTeams():
+    """
+    Rename a certain set of teams
+    """
+    def __init__(self) -> None:
+        pass
+
+    def __call__(self, dataframe: pd.DataFrame, column: str, map_dict: Dict) -> pd.DataFrame:
+        # Replace the old names by the new ones
+        dataframe[column] = dataframe[column].replace(map_dict)
+
+        return dataframe
