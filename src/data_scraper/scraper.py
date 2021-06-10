@@ -1,6 +1,7 @@
 import yaml
 from typing import Dict, List, Tuple
 from abc import ABC, abstractmethod
+import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,6 +28,10 @@ class SeleniumWebScraper():
         Dictionary containing the scraper configuration.
     """
     def __init__(self, config_file: str, driver_path: str = 'geckodriver') -> None:
+        if not os.path.isfile(driver_path):
+            print(driver_path)
+            raise ValueError('There is no driver')
+
         self._webdriver = self._create_webdriver(driver_path)
         self._config = self._get_config_from_yaml(config_file)
 
@@ -41,7 +46,7 @@ class SeleniumWebScraper():
         """
         # Add options to hide the webdriver window
         options = webdriver.FirefoxOptions()
-        options.add_argument('-headless')
+        options.headless = True
         driver = webdriver.Firefox(executable_path=driver_path, options=options)
         
         return driver
