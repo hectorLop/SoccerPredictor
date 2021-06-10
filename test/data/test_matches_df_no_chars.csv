@@ -1,0 +1,381 @@
+season,league_match,home,team_1,team_2,outcome
+1999,1,team_1,Alavés,Real Betis,draw
+1999,1,team_1,Valencia,Atlético,team_1
+1999,1,team_1,UD Salamanca,Mallorca,draw
+1999,1,team_1,Espanyol,Tenerife,team_1
+1999,1,team_1,Celta,Deportivo,draw
+1999,1,team_1,CF Extremadura,Real Valladolid,draw
+1999,1,team_1,Real Zaragoza,Athletic,team_1
+1999,1,team_1,R. Sociedad,Real Oviedo,draw
+1999,1,team_1,Racing,Barcelona,draw
+1999,1,team_1,Real Madrid,Villarreal,team_1
+1999,2,team_1,Atlético,UD Salamanca,team_1
+1999,2,team_1,Real Valladolid,Real Madrid,team_2
+1999,2,team_1,Athletic,Racing,team_1
+1999,2,team_1,Barcelona,CF Extremadura,team_1
+1999,2,team_1,Deportivo,Valencia,team_1
+1999,2,team_1,Villarreal,Celta,draw
+1999,2,team_1,Tenerife,R. Sociedad,draw
+1999,2,team_1,Real Betis,Real Zaragoza,team_2
+1999,2,team_1,Real Oviedo,Alavés,team_1
+1999,2,team_1,Mallorca,Espanyol,team_1
+1999,3,team_1,Real Madrid,Barcelona,draw
+1999,3,team_1,Alavés,Real Zaragoza,team_1
+1999,3,team_1,UD Salamanca,Deportivo,team_1
+1999,3,team_1,Real Oviedo,Tenerife,team_2
+1999,3,team_1,Racing,Real Betis,team_1
+1999,3,team_1,CF Extremadura,Athletic,team_2
+1999,3,team_1,Celta,Real Valladolid,draw
+1999,3,team_1,Valencia,Villarreal,team_1
+1999,3,team_1,R. Sociedad,Mallorca,team_2
+1999,3,team_1,Espanyol,Atlético,draw
+1999,4,team_1,Real Valladolid,Valencia,team_1
+1999,4,team_1,Athletic,Real Madrid,team_2
+1999,4,team_1,Atlético,R. Sociedad,team_1
+1999,4,team_1,Barcelona,Celta,draw
+1999,4,team_1,Real Betis,CF Extremadura,draw
+1999,4,team_1,Deportivo,Espanyol,team_1
+1999,4,team_1,Villarreal,UD Salamanca,team_1
+1999,4,team_1,Tenerife,Alavés,team_2
+1999,4,team_1,Mallorca,Real Oviedo,draw
+1999,4,team_1,Real Zaragoza,Racing,team_1
+1999,5,team_1,Valencia,Barcelona,team_2
+1999,5,team_1,R. Sociedad,Deportivo,team_1
+1999,5,team_1,Alavés,Racing,team_2
+1999,5,team_1,CF Extremadura,Real Zaragoza,team_2
+1999,5,team_1,Celta,Athletic,team_1
+1999,5,team_1,Espanyol,Villarreal,draw
+1999,5,team_1,Real Oviedo,Atlético,team_1
+1999,5,team_1,UD Salamanca,Real Valladolid,team_1
+1999,5,team_1,Tenerife,Mallorca,draw
+1999,5,team_1,Real Madrid,Real Betis,team_2
+1999,6,team_1,Barcelona,UD Salamanca,draw
+1999,6,team_1,Real Zaragoza,Real Madrid,team_2
+1999,6,team_1,Villarreal,R. Sociedad,draw
+1999,6,team_1,Real Betis,Celta,team_2
+1999,6,team_1,Atlético,Tenerife,team_1
+1999,6,team_1,Athletic,Valencia,team_1
+1999,6,team_1,Deportivo,Real Oviedo,team_1
+1999,6,team_1,Real Valladolid,Espanyol,team_1
+1999,6,team_1,Racing,CF Extremadura,team_1
+1999,6,team_1,Mallorca,Alavés,team_1
+1999,7,team_1,Celta,Real Zaragoza,team_1
+1999,7,team_1,Valencia,Real Betis,team_1
+1999,7,team_1,Alavés,CF Extremadura,team_2
+1999,7,team_1,UD Salamanca,Athletic,team_1
+1999,7,team_1,Espanyol,Barcelona,team_2
+1999,7,team_1,R. Sociedad,Real Valladolid,team_1
+1999,7,team_1,Tenerife,Deportivo,draw
+1999,7,team_1,Mallorca,Atlético,team_1
+1999,7,team_1,Real Oviedo,Villarreal,draw
+1999,7,team_1,Real Madrid,Racing,draw
+1999,8,team_1,Athletic,Espanyol,draw
+1999,8,team_1,CF Extremadura,Real Madrid,team_2
+1999,8,team_1,Racing,Celta,draw
+1999,8,team_1,Real Betis,UD Salamanca,team_1
+1999,8,team_1,Barcelona,R. Sociedad,team_1
+1999,8,team_1,Atlético,Alavés,team_1
+1999,8,team_1,Real Zaragoza,Valencia,team_2
+1999,8,team_1,Real Valladolid,Real Oviedo,team_1
+1999,8,team_1,Villarreal,Tenerife,team_2
+1999,8,team_1,Deportivo,Mallorca,draw
+1999,9,team_1,Espanyol,Real Betis,team_1
+1999,9,team_1,UD Salamanca,Real Zaragoza,team_2
+1999,9,team_1,Alavés,Real Madrid,draw
+1999,9,team_1,Tenerife,Real Valladolid,draw
+1999,9,team_1,Celta,CF Extremadura,team_1
+1999,9,team_1,Mallorca,Villarreal,team_1
+1999,9,team_1,Atlético,Deportivo,draw
+1999,9,team_1,R. Sociedad,Athletic,team_1
+1999,9,team_1,Real Oviedo,Barcelona,team_1
+1999,9,team_1,Valencia,Racing,team_1
+1999,10,team_1,Real Madrid,Celta,team_2
+1999,10,team_1,Real Valladolid,Mallorca,team_1
+1999,10,team_1,Villarreal,Atlético,team_1
+1999,10,team_1,CF Extremadura,Valencia,team_1
+1999,10,team_1,Racing,UD Salamanca,team_1
+1999,10,team_1,Real Zaragoza,Espanyol,team_2
+1999,10,team_1,Barcelona,Tenerife,team_1
+1999,10,team_1,Deportivo,Alavés,draw
+1999,10,team_1,Athletic,Real Oviedo,team_2
+1999,10,team_1,Real Betis,R. Sociedad,team_1
+1999,11,team_1,Tenerife,Athletic,team_2
+1999,11,team_1,R. Sociedad,Real Zaragoza,draw
+1999,11,team_1,Alavés,Celta,team_1
+1999,11,team_1,Valencia,Real Madrid,team_1
+1999,11,team_1,Mallorca,Barcelona,team_1
+1999,11,team_1,Atlético,Real Valladolid,team_1
+1999,11,team_1,Real Oviedo,Real Betis,team_2
+1999,11,team_1,Deportivo,Villarreal,team_1
+1999,11,team_1,UD Salamanca,CF Extremadura,team_1
+1999,11,team_1,Espanyol,Racing,draw
+1999,12,team_1,Barcelona,Atlético,team_2
+1999,12,team_1,Real Betis,Tenerife,team_1
+1999,12,team_1,Celta,Valencia,draw
+1999,12,team_1,CF Extremadura,Espanyol,team_1
+1999,12,team_1,Real Zaragoza,Real Oviedo,team_1
+1999,12,team_1,Athletic,Mallorca,team_1
+1999,12,team_1,Real Valladolid,Deportivo,team_2
+1999,12,team_1,Villarreal,Alavés,team_1
+1999,12,team_1,Racing,R. Sociedad,team_2
+1999,12,team_1,Real Madrid,UD Salamanca,team_1
+1999,13,team_1,UD Salamanca,Celta,draw
+1999,13,team_1,Espanyol,Real Madrid,draw
+1999,13,team_1,R. Sociedad,CF Extremadura,team_1
+1999,13,team_1,Mallorca,Real Betis,team_1
+1999,13,team_1,Deportivo,Barcelona,team_1
+1999,13,team_1,Atlético,Athletic,draw
+1999,13,team_1,Alavés,Valencia,team_2
+1999,13,team_1,Tenerife,Real Zaragoza,draw
+1999,13,team_1,Villarreal,Real Valladolid,team_1
+1999,13,team_1,Real Oviedo,Racing,team_1
+1999,14,team_1,Real Betis,Atlético,draw
+1999,14,team_1,Real Madrid,R. Sociedad,team_1
+1999,14,team_1,Racing,Tenerife,draw
+1999,14,team_1,Barcelona,Villarreal,team_2
+1999,14,team_1,Real Valladolid,Alavés,team_1
+1999,14,team_1,CF Extremadura,Real Oviedo,team_2
+1999,14,team_1,Real Zaragoza,Mallorca,team_2
+1999,14,team_1,Athletic,Deportivo,team_1
+1999,14,team_1,Valencia,UD Salamanca,team_1
+1999,14,team_1,Celta,Espanyol,team_1
+1999,15,team_1,Deportivo,Real Betis,draw
+1999,15,team_1,Mallorca,Racing,draw
+1999,15,team_1,Alavés,UD Salamanca,team_1
+1999,15,team_1,Tenerife,CF Extremadura,draw
+1999,15,team_1,Espanyol,Valencia,team_1
+1999,15,team_1,Real Oviedo,Real Madrid,team_1
+1999,15,team_1,Real Valladolid,Barcelona,team_2
+1999,15,team_1,Atlético,Real Zaragoza,draw
+1999,15,team_1,Villarreal,Athletic,team_2
+1999,15,team_1,R. Sociedad,Celta,team_1
+1999,16,team_1,Barcelona,Alavés,team_1
+1999,16,team_1,CF Extremadura,Mallorca,team_1
+1999,16,team_1,UD Salamanca,Espanyol,team_2
+1999,16,team_1,Celta,Real Oviedo,team_1
+1999,16,team_1,Real Madrid,Tenerife,team_1
+1999,16,team_1,Racing,Atlético,team_2
+1999,16,team_1,Real Betis,Villarreal,team_1
+1999,16,team_1,Athletic,Real Valladolid,team_1
+1999,16,team_1,Real Zaragoza,Deportivo,team_1
+1999,16,team_1,Valencia,R. Sociedad,team_1
+1999,17,team_1,Mallorca,Real Madrid,team_1
+1999,17,team_1,Tenerife,Celta,team_2
+1999,17,team_1,Alavés,Espanyol,draw
+1999,17,team_1,Atlético,CF Extremadura,team_1
+1999,17,team_1,R. Sociedad,UD Salamanca,team_1
+1999,17,team_1,Real Oviedo,Valencia,draw
+1999,17,team_1,Deportivo,Racing,team_2
+1999,17,team_1,Villarreal,Real Zaragoza,draw
+1999,17,team_1,Real Valladolid,Real Betis,team_2
+1999,17,team_1,Barcelona,Athletic,team_1
+1999,18,team_1,Celta,Mallorca,team_1
+1999,18,team_1,CF Extremadura,Deportivo,team_2
+1999,18,team_1,Real Betis,Barcelona,team_2
+1999,18,team_1,Espanyol,R. Sociedad,draw
+1999,18,team_1,UD Salamanca,Real Oviedo,draw
+1999,18,team_1,Real Madrid,Atlético,team_1
+1999,18,team_1,Racing,Villarreal,team_2
+1999,18,team_1,Real Zaragoza,Real Valladolid,team_1
+1999,18,team_1,Alavés,Athletic,team_2
+1999,18,team_1,Valencia,Tenerife,draw
+1999,19,team_1,Athletic,Real Betis,draw
+1999,19,team_1,Deportivo,Real Madrid,team_1
+1999,19,team_1,Real Oviedo,Espanyol,draw
+1999,19,team_1,Tenerife,UD Salamanca,team_1
+1999,19,team_1,Villarreal,CF Extremadura,draw
+1999,19,team_1,R. Sociedad,Alavés,team_1
+1999,19,team_1,Mallorca,Valencia,team_2
+1999,19,team_1,Atlético,Celta,team_1
+1999,19,team_1,Real Valladolid,Racing,draw
+1999,19,team_1,Barcelona,Real Zaragoza,team_1
+1999,20,team_2,Valencia,Atlético,team_1
+1999,20,team_2,Real Zaragoza,Athletic,team_2
+1999,20,team_2,UD Salamanca,Mallorca,team_2
+1999,20,team_2,R. Sociedad,Real Oviedo,team_2
+1999,20,team_2,Real Madrid,Villarreal,team_1
+1999,20,team_2,Alavés,Real Betis,team_2
+1999,20,team_2,Racing,Barcelona,team_2
+1999,20,team_2,Espanyol,Tenerife,draw
+1999,20,team_2,CF Extremadura,Real Valladolid,draw
+1999,20,team_2,Celta,Deportivo,team_2
+1999,21,team_2,Deportivo,Valencia,draw
+1999,21,team_2,Villarreal,Celta,team_2
+1999,21,team_2,Athletic,Racing,team_2
+1999,21,team_2,Barcelona,CF Extremadura,team_1
+1999,21,team_2,Real Valladolid,Real Madrid,team_2
+1999,21,team_2,Atlético,UD Salamanca,team_2
+1999,21,team_2,Mallorca,Espanyol,team_2
+1999,21,team_2,Tenerife,R. Sociedad,draw
+1999,21,team_2,Real Betis,Real Zaragoza,draw
+1999,21,team_2,Real Oviedo,Alavés,draw
+1999,22,team_2,UD Salamanca,Deportivo,team_2
+1999,22,team_2,R. Sociedad,Mallorca,team_2
+1999,22,team_2,Espanyol,Atlético,team_1
+1999,22,team_2,Celta,Real Valladolid,team_2
+1999,22,team_2,Alavés,Real Zaragoza,draw
+1999,22,team_2,Racing,Real Betis,draw
+1999,22,team_2,CF Extremadura,Athletic,draw
+1999,22,team_2,Real Madrid,Barcelona,team_2
+1999,22,team_2,Real Oviedo,Tenerife,team_1
+1999,22,team_2,Valencia,Villarreal,team_2
+1999,23,team_2,Real Betis,CF Extremadura,team_2
+1999,23,team_2,Athletic,Real Madrid,team_1
+1999,23,team_2,Real Zaragoza,Racing,team_1
+1999,23,team_2,Mallorca,Real Oviedo,team_1
+1999,23,team_2,Atlético,R. Sociedad,team_2
+1999,23,team_2,Barcelona,Celta,draw
+1999,23,team_2,Real Valladolid,Valencia,team_1
+1999,23,team_2,Deportivo,Espanyol,draw
+1999,23,team_2,Tenerife,Alavés,team_2
+1999,23,team_2,Villarreal,UD Salamanca,team_2
+1999,24,team_2,Real Oviedo,Atlético,draw
+1999,24,team_2,Celta,Athletic,draw
+1999,24,team_2,Valencia,Barcelona,team_1
+1999,24,team_2,Real Madrid,Real Betis,team_2
+1999,24,team_2,Espanyol,Villarreal,draw
+1999,24,team_2,Tenerife,Mallorca,draw
+1999,24,team_2,R. Sociedad,Deportivo,team_1
+1999,24,team_2,Alavés,Racing,team_2
+1999,24,team_2,CF Extremadura,Real Zaragoza,team_2
+1999,24,team_2,UD Salamanca,Real Valladolid,team_2
+1999,25,team_2,Deportivo,Real Oviedo,team_1
+1999,25,team_2,Real Valladolid,Espanyol,team_1
+1999,25,team_2,Racing,CF Extremadura,team_1
+1999,25,team_2,Real Zaragoza,Real Madrid,team_2
+1999,25,team_2,Atlético,Tenerife,team_2
+1999,25,team_2,Barcelona,UD Salamanca,team_1
+1999,25,team_2,Real Betis,Celta,team_2
+1999,25,team_2,Villarreal,R. Sociedad,draw
+1999,25,team_2,Mallorca,Alavés,team_2
+1999,25,team_2,Athletic,Valencia,team_2
+1999,26,team_2,Valencia,Real Betis,team_1
+1999,26,team_2,Real Madrid,Racing,team_1
+1999,26,team_2,Celta,Real Zaragoza,team_1
+1999,26,team_2,Mallorca,Atlético,team_1
+1999,26,team_2,Real Oviedo,Villarreal,draw
+1999,26,team_2,Alavés,CF Extremadura,team_2
+1999,26,team_2,UD Salamanca,Athletic,team_2
+1999,26,team_2,R. Sociedad,Real Valladolid,draw
+1999,26,team_2,Tenerife,Deportivo,team_2
+1999,26,team_2,Espanyol,Barcelona,team_2
+1999,27,team_2,Athletic,Espanyol,draw
+1999,27,team_2,Real Betis,UD Salamanca,team_1
+1999,27,team_2,Villarreal,Tenerife,draw
+1999,27,team_2,Real Zaragoza,Valencia,draw
+1999,27,team_2,CF Extremadura,Real Madrid,team_2
+1999,27,team_2,Racing,Celta,team_2
+1999,27,team_2,Real Valladolid,Real Oviedo,draw
+1999,27,team_2,Deportivo,Mallorca,team_1
+1999,27,team_2,Atlético,Alavés,team_2
+1999,27,team_2,Barcelona,R. Sociedad,team_1
+1999,28,team_2,Valencia,Racing,team_1
+1999,28,team_2,Atlético,Deportivo,draw
+1999,28,team_2,Real Oviedo,Barcelona,team_2
+1999,28,team_2,Alavés,Real Madrid,team_2
+1999,28,team_2,UD Salamanca,Real Zaragoza,team_2
+1999,28,team_2,R. Sociedad,Athletic,draw
+1999,28,team_2,Tenerife,Real Valladolid,team_2
+1999,28,team_2,Mallorca,Villarreal,team_1
+1999,28,team_2,Celta,CF Extremadura,draw
+1999,28,team_2,Espanyol,Real Betis,team_1
+1999,29,team_2,Barcelona,Tenerife,team_1
+1999,29,team_2,Real Zaragoza,Espanyol,team_2
+1999,29,team_2,Real Madrid,Celta,team_2
+1999,29,team_2,Villarreal,Atlético,draw
+1999,29,team_2,CF Extremadura,Valencia,draw
+1999,29,team_2,Racing,UD Salamanca,team_1
+1999,29,team_2,Athletic,Real Oviedo,draw
+1999,29,team_2,Real Valladolid,Mallorca,team_2
+1999,29,team_2,Deportivo,Alavés,team_2
+1999,29,team_2,Real Betis,R. Sociedad,team_2
+1999,30,team_2,Atlético,Real Valladolid,team_2
+1999,30,team_2,Mallorca,Barcelona,team_2
+1999,30,team_2,Tenerife,Athletic,team_2
+1999,30,team_2,Alavés,Celta,draw
+1999,30,team_2,UD Salamanca,CF Extremadura,draw
+1999,30,team_2,Espanyol,Racing,team_1
+1999,30,team_2,Real Oviedo,Real Betis,team_2
+1999,30,team_2,Valencia,Real Madrid,team_2
+1999,30,team_2,Deportivo,Villarreal,team_1
+1999,30,team_2,R. Sociedad,Real Zaragoza,draw
+1999,31,team_2,Celta,Valencia,draw
+1999,31,team_2,Racing,R. Sociedad,team_2
+1999,31,team_2,Real Madrid,UD Salamanca,draw
+1999,31,team_2,CF Extremadura,Espanyol,draw
+1999,31,team_2,Real Betis,Tenerife,team_2
+1999,31,team_2,Real Zaragoza,Real Oviedo,team_1
+1999,31,team_2,Athletic,Mallorca,team_2
+1999,31,team_2,Real Valladolid,Deportivo,team_2
+1999,31,team_2,Barcelona,Atlético,draw
+1999,31,team_2,Villarreal,Alavés,team_2
+1999,32,team_2,Espanyol,Real Madrid,team_2
+1999,32,team_2,Alavés,Valencia,team_2
+1999,32,team_2,Tenerife,Real Zaragoza,team_2
+1999,32,team_2,Atlético,Athletic,team_1
+1999,32,team_2,UD Salamanca,Celta,team_2
+1999,32,team_2,R. Sociedad,CF Extremadura,team_2
+1999,32,team_2,Real Oviedo,Racing,draw
+1999,32,team_2,Deportivo,Barcelona,team_2
+1999,32,team_2,Villarreal,Real Valladolid,team_2
+1999,32,team_2,Mallorca,Real Betis,team_1
+1999,33,team_2,Real Madrid,R. Sociedad,team_2
+1999,33,team_2,Real Betis,Atlético,team_1
+1999,33,team_2,Valencia,UD Salamanca,team_1
+1999,33,team_2,Celta,Espanyol,team_2
+1999,33,team_2,CF Extremadura,Real Oviedo,team_2
+1999,33,team_2,Real Zaragoza,Mallorca,team_2
+1999,33,team_2,Athletic,Deportivo,draw
+1999,33,team_2,Barcelona,Villarreal,team_1
+1999,33,team_2,Real Valladolid,Alavés,team_2
+1999,33,team_2,Racing,Tenerife,draw
+1999,34,team_2,Mallorca,Racing,team_2
+1999,34,team_2,Real Valladolid,Barcelona,draw
+1999,34,team_2,Tenerife,CF Extremadura,team_2
+1999,34,team_2,Espanyol,Valencia,team_1
+1999,34,team_2,Alavés,UD Salamanca,team_2
+1999,34,team_2,R. Sociedad,Celta,draw
+1999,34,team_2,Real Oviedo,Real Madrid,team_2
+1999,34,team_2,Deportivo,Real Betis,team_1
+1999,34,team_2,Villarreal,Athletic,team_2
+1999,34,team_2,Atlético,Real Zaragoza,team_2
+1999,35,team_2,Barcelona,Alavés,team_1
+1999,35,team_2,Real Betis,Villarreal,team_1
+1999,35,team_2,Valencia,R. Sociedad,draw
+1999,35,team_2,Celta,Real Oviedo,team_1
+1999,35,team_2,Real Madrid,Tenerife,team_1
+1999,35,team_2,Racing,Atlético,draw
+1999,35,team_2,Athletic,Real Valladolid,team_1
+1999,35,team_2,UD Salamanca,Espanyol,team_2
+1999,35,team_2,Real Zaragoza,Deportivo,team_2
+1999,35,team_2,CF Extremadura,Mallorca,team_2
+1999,36,team_2,Real Oviedo,Valencia,team_2
+1999,36,team_2,Barcelona,Athletic,team_1
+1999,36,team_2,Deportivo,Racing,draw
+1999,36,team_2,R. Sociedad,UD Salamanca,team_1
+1999,36,team_2,Tenerife,Celta,team_2
+1999,36,team_2,Alavés,Espanyol,team_2
+1999,36,team_2,Atlético,CF Extremadura,team_2
+1999,36,team_2,Real Valladolid,Real Betis,team_2
+1999,36,team_2,Mallorca,Real Madrid,team_2
+1999,36,team_2,Villarreal,Real Zaragoza,team_2
+1999,37,team_2,Real Zaragoza,Real Valladolid,draw
+1999,37,team_2,CF Extremadura,Deportivo,draw
+1999,37,team_2,Real Madrid,Atlético,team_2
+1999,37,team_2,Alavés,Athletic,team_2
+1999,37,team_2,Real Betis,Barcelona,team_2
+1999,37,team_2,Valencia,Tenerife,team_2
+1999,37,team_2,Celta,Mallorca,team_2
+1999,37,team_2,Espanyol,R. Sociedad,team_1
+1999,37,team_2,Racing,Villarreal,team_2
+1999,37,team_2,UD Salamanca,Real Oviedo,team_2
+1999,38,team_2,Real Valladolid,Racing,team_1
+1999,38,team_2,Tenerife,UD Salamanca,team_1
+1999,38,team_2,Atlético,Celta,team_1
+1999,38,team_2,Deportivo,Real Madrid,team_2
+1999,38,team_2,Villarreal,CF Extremadura,draw
+1999,38,team_2,Barcelona,Real Zaragoza,team_2
+1999,38,team_2,Athletic,Real Betis,team_1
+1999,38,team_2,R. Sociedad,Alavés,team_2
+1999,38,team_2,Real Oviedo,Espanyol,team_2
+1999,38,team_2,Mallorca,Valencia,team_2
