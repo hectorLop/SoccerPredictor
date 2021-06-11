@@ -13,7 +13,8 @@ from src.preprocessing.cleaning_preprocesses import (
 from test.data.data_fixtures import (
     get_dataframes,
     get_removed_characters_df,
-    get_renamed_df
+    get_renamed_df,
+    get_cleaned_df
 )
 
 def test_remove_special_characters(get_dataframes, get_removed_characters_df):
@@ -57,3 +58,25 @@ def test_rename_teams(get_dataframes, get_renamed_df):
     matches_df_trans = renamer(matches_df)
 
     assert_frame_equal(expected_matches_df, matches_df_trans)
+
+def test_cleaning_pipeline(get_dataframes, get_cleaned_df):
+    matches_df, rank_df = get_dataframes
+    expected_matches_df, expected_rank_df = get_cleaned_df
+
+    characters = ['\n', '*', ' ']
+
+    matches_pipeline = Pipeline([
+        RemoveFirstLeagueMatch(),
+        RemoveSpecialCharacters(['team_1', 'team_2'], characters),
+        RenameTeams(['team_1', 'team_2'], {'Gimnàstic Tarragona': 'Gimnàstic'})
+    ])
+
+    rank_pipeline = Pipeline([
+        RemoveSpecialCharacters(['team'], characters)
+    ])
+
+    matches_df_trans = matches_pipeline.transform(matches_df)
+    rank_df_trans = rank_pipeline.transform(rank_df)
+
+    assert_frame_equal(matches_df_trans, expected_matches_df)
+    assert_frame_equal(rank_df_trans, expected_rank_df)

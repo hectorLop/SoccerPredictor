@@ -26,3 +26,11 @@ def get_renamed_df():
                                         'test_matches_df_rename.csv'))
 
     return matches_df
+
+@fixture
+def get_cleaned_df():
+    matches_df = pd.read_csv(os.path.join(THIS_DIR,
+                                        'test_matches_df_pipeline.csv'))
+    rank_df = pd.read_csv(os.path.join(THIS_DIR, 'test_rank_df_pipeline.csv'))
+
+    return matches_df, rank_df 

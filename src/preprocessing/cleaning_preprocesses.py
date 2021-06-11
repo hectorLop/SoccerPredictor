@@ -6,7 +6,7 @@ class Pipeline():
     def __init__(self, preprocesses: List) -> None:
         self.preprocesses = preprocesses
 
-    def transformm(self, dataframe):
+    def transform(self, dataframe: pd.DataFrame):
         for preprocess in self.preprocesses:
             dataframe = preprocess(dataframe)
 
@@ -71,7 +71,8 @@ class RemoveFirstLeagueMatch():
     def __call__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
         # Exclude rows where the league_match is 1
         dataframe = dataframe[~(dataframe['league_match'] == 1)]
-
+        dataframe = dataframe.reset_index(drop=True)
+        
         return dataframe
 
 class RenameTeams():
