@@ -33,4 +33,11 @@ def get_cleaned_df():
                                         'test_matches_df_pipeline.csv'))
     rank_df = pd.read_csv(os.path.join(THIS_DIR, 'test_rank_df_pipeline.csv'))
 
-    return matches_df, rank_df 
+    return matches_df, rank_df
+
+@fixture
+def get_features_df():
+    matches_df = pd.read_csv(os.path.join(THIS_DIR,
+                                        'test_matches_df_features_pip.csv'))
+
+    return matches_df
