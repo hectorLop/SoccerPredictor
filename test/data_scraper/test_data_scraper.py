@@ -6,7 +6,7 @@ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def test_data_scraper_get_matches_data():
     driver = os.path.join(THIS_DIR, 'geckodriver')
-    scraper = SeleniumWebScraper(config_file='test/test_data_scraper/test_scraper_config.yml',
+    scraper = SeleniumWebScraper(config_file=os.path.join(THIS_DIR, 'test_scraper_config.yml'),
                                 driver_path=driver)
 
     data = scraper.get_matches_data()
@@ -17,7 +17,7 @@ def test_data_scraper_get_matches_data():
 
 def test_data_scraper_get_ranks_data():
     driver = os.path.join(THIS_DIR, 'geckodriver')
-    scraper = SeleniumWebScraper(config_file='test/test_data_scraper/test_scraper_config.yml',
+    scraper = SeleniumWebScraper(config_file=os.path.join(THIS_DIR, 'test_scraper_config.yml'),
                                 driver_path=driver)
 
     data = scraper.get_ranks_data()
