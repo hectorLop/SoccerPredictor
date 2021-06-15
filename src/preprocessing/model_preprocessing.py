@@ -5,17 +5,21 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 import numpy as np
 
-class ModelPreprocesser(TransformerMixin):
+class ModelPreprocesser(BaseEstimator, TransformerMixin):
     def __init__(self) -> None:
-        self.pipeline = self.get_pipeline()
+        self.pipeline = self._get_pipeline()
 
     def fit(self, X):
         self.pipeline.fit(X)
 
-    def transform(self, X):
-        self.pipeline.transform(X)
+        return self
 
-    def _get_pipeline():
+    def transform(self, X, y=None):
+        X_trans = self.pipeline.transform(X)
+
+        return X_trans
+
+    def _get_pipeline(self):
         # Categorical attributes pipeline
         cat_pipeline = Pipeline([
             ('encoder', OneHotEncoder())
@@ -26,11 +30,13 @@ class ModelPreprocesser(TransformerMixin):
             ('scaler', StandardScaler())
         ])
 
+        # Pipeline to transform columns
         prep_pipeline = ColumnTransformer([
             ('cat', cat_pipeline, make_column_selector(dtype_include=object)),
             ('num', num_pipeline, make_column_selector(dtype_include=np.number))
         ])
 
+        # Final pipeline
         pipeline = Pipeline([
             ('feature_selector', FeatureSelector(['season', 'team_1', 'team_2',
                                                 'league_match'])),
@@ -62,7 +68,7 @@ class GoalDifference(BaseEstimator, TransformerMixin):
     
     def transform(self, X, y=None):
         X['goals_difference_t1'] = X['goals_scored_t1'] - X['goals_conceded_t1']
-        X['goals_difference_t2'] = X['goals_scored_t2'] - X['goals_conceced_t2']
+        X['goals_difference_t2'] = X['goals_scored_t2'] - X['goals_conceded_t2']
 
         return X
     

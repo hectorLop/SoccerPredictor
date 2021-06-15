@@ -1,6 +1,7 @@
 from pytest import fixture
 
 import pandas as pd
+import numpy as np
 import os
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -41,3 +42,10 @@ def get_features_df():
                                         'test_matches_df_features_pip.csv'))
 
     return matches_df
+
+@fixture
+def get_transformed_test_data():
+    test_data = np.load(os.path.join(THIS_DIR,
+                                        'transformed_test_data.npy'))
+
+    return test_data
