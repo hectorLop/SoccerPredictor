@@ -3,3 +3,4 @@ pandas
 pytest
 pyyaml
 selenium
+scikit-learn
