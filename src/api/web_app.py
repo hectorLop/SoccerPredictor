@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import requests
+import json
 
 # Writing App Title and Description
 st.title('Spanish LaLiga Prediction')
@@ -135,9 +137,9 @@ losses_streak_t2 = st.sidebar.slider(label='Team 2: Losses streak',
 features = {
     'season': 2020,
     'league_match': 15,
+    'home': home,
     'team_1': team_1,
     'team_2': team_2,
-    'home': home,
     'goals_conceded_t1': goals_conceded_t1,
     'goals_conceded_t2': goals_conceded_t2,
     'goals_scored_t1': goals_scored_t1,
@@ -164,9 +166,10 @@ features = {
     'losses_streak_t2': losses_streak_t2 
 }
 
-features_df = pd.DataFrame([features])
+#features_df = pd.DataFrame([features])
 
 # Predicting Star Rating
 
 if st.button('Predict'):
-    st.write('TODO: Prediction')
+    x = requests.post('http://localhost:5000/predict', json=features)
+    st.write(x.content)
