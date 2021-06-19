@@ -4,10 +4,17 @@ from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 import numpy as np
+import os
+import pickle
 
 class ModelPreprocesser(BaseEstimator, TransformerMixin):
-    def __init__(self) -> None:
-        self.pipeline = self._get_pipeline()
+    _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    def __init__(self, trained_pipeline : str = '') -> None:
+        if trained_pipeline:
+            self.pipeline = self._get_trained_pipeline(trained_pipeline)
+        else:
+            self.pipeline = self._get_pipeline()
 
     def fit(self, X):
         self.pipeline.fit(X)
@@ -18,6 +25,12 @@ class ModelPreprocesser(BaseEstimator, TransformerMixin):
         X_trans = self.pipeline.transform(X)
 
         return X_trans
+
+    def _get_trained_pipeline(self, trained_pipeline : str):
+        with open(trained_pipeline, 'rb') as file:
+            pipeline = pickle.load(file)
+
+        return pipeline
 
     def _get_pipeline(self):
         # Categorical attributes pipeline

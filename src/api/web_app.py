@@ -172,4 +172,11 @@ features = {
 
 if st.button('Predict'):
     x = requests.post('http://localhost:5000/predict', json=features)
-    st.write(x.content)
+    x = json.loads(x.content)
+
+    if x['winner'] == 'draw':
+        st.write('The match outcome is a DRAW')
+    elif x['winner'] == 'team_2':
+        st.write(f'{team_2} is the winner')
+    else:
+        st.write(f'{team_1} is the winner')
