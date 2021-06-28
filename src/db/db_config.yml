@@ -1,0 +1,6 @@
+db_engine: postgresql
+host: localhost
+port: 5438
+user: postgres
+password: postgres
+db_name: Spanish_LaLiga

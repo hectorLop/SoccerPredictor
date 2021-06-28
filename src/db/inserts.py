@@ -1,20 +1,16 @@
 from src.db.data import Match, Rank
-from src.db.db import Session, engine, Base
-import pandas as pd
+from src.db.manager import DBManager
+import os
 
-# 2 - generate database schema
-Base.metadata.create_all(engine)
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 3 - create a new session
-session = Session()
+manager = DBManager(os.path.join(THIS_DIR, 'db_config.yml'))
 
 # 4 - create movies
 match = Match(1999, 1, 'Madrid', 'Barsa', 'draw')
 rank = Rank(1999, 1, 'Madrid', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-session.add(match)
-session.add(rank)
+manager.insert(match)
+manager.insert(rank)
 
-# 10 - commit and close session
-session.commit()
-session.close()
+manager.close()

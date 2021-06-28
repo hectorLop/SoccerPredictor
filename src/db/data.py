@@ -1,5 +1,7 @@
-from sqlalchemy import Column, String, Integer, Date
-from src.db.db import Base
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 class Match(Base):
     __tablename__ = 'matches'
