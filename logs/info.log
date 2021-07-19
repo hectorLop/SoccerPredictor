@@ -1,0 +1,27 @@
+INFO 2021-07-19 19:36:45,249 [train.py:<module>:41]
+Preprocessing data
+
+INFO 2021-07-19 19:36:45,294 [train.py:<module>:43]
+Training the model
+
+INFO 2021-07-19 19:36:46,245 [train.py:<module>:45]
+Model training completed. Generated new model and pipeline files.
+
+INFO 2021-07-19 19:37:32,932 [train.py:<module>:42]
+Preprocessing data
+
+INFO 2021-07-19 19:37:32,983 [train.py:<module>:44]
+Training the model
+
+INFO 2021-07-19 19:37:33,897 [train.py:<module>:46]
+Model training completed. Generated new model and pipeline files.
+
+INFO 2021-07-19 19:40:13,396 [train.py:<module>:43]
+Preprocessing data
+
+INFO 2021-07-19 19:40:13,446 [train.py:<module>:45]
+Training the model
+
+INFO 2021-07-19 19:40:14,382 [train.py:<module>:47]
+Model training completed. Generated new model and pipeline files.
+
