@@ -1,43 +1,85 @@
+from fastapi import requests
 from flask import Flask, jsonify, request
 from xgboost import XGBClassifier
 from src.preprocessing.model_preprocessing import ModelPreprocesser
 from src.preprocessing.model_preprocessing import FeatureSelector
 from sklearn.pipeline import Pipeline
+from fastapi import FastAPI
+from http import HTTPStatus
+from fastapi.requests import Request
+from datetime import datetime
+from functools import wraps
+from src.config.logger_config import logger
+from typing import Dict
+from src.api.schemas import Item
 
 import pickle
 import os
 import pandas as pd
+import sys
 
-app = Flask(__name__)
+PIPELINE_PATH = os.path.join(sys.path[0], 'src/models_pipelines/pipeline.pkl')
+MODEL_PATH = os.path.join(sys.path[0], 'src/models_pipelines/xgboost_model.pkl')
 
-class FeatureSelector:
-    def __init__(self) -> None:
-        pass
+# Define application
+app = FastAPI(
+    title="Spanish LaLiga Predictor",
+    description="Predict spanish LaLiga matches outcome.",
+    version="0.1",
+)
 
-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+@app.on_event("startup")
+def load_artifacts():
+    global model, pipeline
+    logger.info("Loading model...")
+    model = pickle.load(open(MODEL_PATH, 'rb'))
+    logger.info("Loading preprocessing pipeline...")
+    pipeline = pickle.load(open(PIPELINE_PATH, 'rb'))
 
-with open(os.path.join(THIS_DIR, 'xgboost_model.pkl'), 'rb') as file:
-    model = pickle.load(file)
+def construct_response(f):
+    """Construct a JSON response for an endpoint's results."""
 
-# TODO: How to serialize the pipeline used in training in order to be able
-# to load it here without pickle AttributeErrors
-pipeline = pickle.load(open(os.path.join(THIS_DIR, 'pipeline.pkl'), 'rb'))
-# pipeline = ModelPreprocesser()
-# df = pd.read_csv(os.path.join(THIS_DIR, 'soccer_dataset.csv'))
-# df = df.drop('outcome', axis=1)
-# df = df.rename(columns={'goals_conceced_t2': 'goals_conceded_t2'})
-# _ = pipeline.fit_transform(df)
+    @wraps(f)
+    def wrap(request: Request, *args, **kwargs):
+        results = f(request, *args, **kwargs)
 
-@app.route('/')
-def hello():
-    return 'Hello World!'
+        # Construct response
+        response = {
+            "message": results["message"],
+            "method": request.method,
+            "status-code": results["status-code"],
+            "timestamp": datetime.now().isoformat(),
+            "url": request.url._url,
+        }
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    json_data = request.json
+        # Add data
+        if "data" in results:
+            response["data"] = results["data"]
+
+        return response
+
+    return wrap
+
+@app.get("/", tags=['General'])
+@construct_response
+def _index(request: Request):
+    """Health check."""
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": {},
+    }
+    return response
+
+@app.post("/predict", tags=["Prediction"])
+async def _predict(request: Request, data: Item) -> Dict:
+    """Predict tags for a list of texts using the best run. """
+    # Predict
+    json_data = await request.json()
     df = pd.DataFrame(json_data, index=[0])
+    logger.info('Preprocessing data')
     transformed_data = pipeline.transform(df)
-
+    logger.info('Making predictions')
     pred = model.predict(transformed_data)[0]
 
     if pred == 0:
@@ -47,7 +89,10 @@ def predict():
     else:
         winner = 'team_2'
 
-    return jsonify({'class_id': str(pred), 'winner': str(winner)})
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": {"winner": winner, "class_id": str(pred)}
+    }
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    return response
