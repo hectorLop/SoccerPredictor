@@ -72,14 +72,14 @@ def _index(request: Request):
     return response
 
 @app.post("/predict", tags=["Prediction"])
-async def _predict(request: Request, data: Item) -> Dict:
+@construct_response
+def _predict(request: Request, features: Item) -> Dict:
     """Predict tags for a list of texts using the best run. """
-    # Predict
-    json_data = await request.json()
-    df = pd.DataFrame(json_data, index=[0])
-    logger.info('Preprocessing data')
+    logger.info('Creating DataFrame...')
+    df = pd.DataFrame(features.__dict__, index=[0])
+    logger.info('Preprocessing data...')
     transformed_data = pipeline.transform(df)
-    logger.info('Making predictions')
+    logger.info('Making predictions...')
     pred = model.predict(transformed_data)[0]
 
     if pred == 0:
