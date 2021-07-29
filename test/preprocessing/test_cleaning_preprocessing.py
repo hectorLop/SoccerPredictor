@@ -10,73 +10,42 @@ from src.preprocessing.cleaning_preprocesses import (
     RenameTeams
 )
 
-from test.data.data_fixtures import (
-    get_dataframes,
-    get_removed_characters_df,
-    get_renamed_df,
-    get_cleaned_df
-)
+from test.data.data_fixtures import get_df_to_clean
 
-def test_remove_special_characters(get_dataframes, get_removed_characters_df):
-    matches_df, rank_df = get_dataframes
-    expected_matches_df, expected_rank_df = get_removed_characters_df
-
+def test_remove_special_characters(get_df_to_clean):
     characters = ['\n', '*', ' ']
 
-    remove_characters = RemoveSpecialCharacters(['team_1', 'team_2'],
-                                                characters)
-    matches_df_trans = remove_characters(matches_df)
+    remove_characters = RemoveSpecialCharacters(['team_1'], characters)
+    clean_df = remove_characters(get_df_to_clean)
 
-    remove_characters = RemoveSpecialCharacters(['team'],
-                                                characters)
-    rank_df_trans = remove_characters(rank_df)
+    for char in characters:
+        assert char not in clean_df['team_1']
 
-    assert_frame_equal(matches_df_trans, expected_matches_df)
-    assert_frame_equal(rank_df_trans, expected_rank_df)
+def test_remove_first_league_match(get_df_to_clean):
+    remover = RemoveFirstLeagueMatch()
+    cleaned_df = remover(get_df_to_clean)
 
-def test_remove_first_league_match(get_dataframes):
-    # Get the test dataframe
-    matches_df, _ = get_dataframes
+    assert np.unique(cleaned_df['league_match'])[0] != 1
 
-    # Transform the data
-    remove_first_league_match = RemoveFirstLeagueMatch()
-    transformed_df = remove_first_league_match(matches_df)
-
-    # Get the league match values
-    league_matches = transformed_df['league_match']
-
-    # Assert if the first league match has been removed
-    assert np.unique(league_matches)[0] != 1
-
-def test_rename_teams(get_dataframes, get_renamed_df):
-    matches_df, _ = get_dataframes
-    expected_matches_df = get_renamed_df
-
-    renamer = RenameTeams(['team_1', 'team_2'],
+def test_rename_teams(get_df_to_clean):
+    renamer = RenameTeams(['team_1'],
                         {'Gimnàstic Tarragona': 'Gimnàstic'})
+    cleaned_df = renamer(get_df_to_clean)
 
-    matches_df_trans = renamer(matches_df)
+    assert cleaned_df['team_1'][3] == 'Gimnàstic'
 
-    assert_frame_equal(expected_matches_df, matches_df_trans)
-
-def test_cleaning_pipeline(get_dataframes, get_cleaned_df):
-    matches_df, rank_df = get_dataframes
-    expected_matches_df, expected_rank_df = get_cleaned_df
-
-    characters = ['\n', '*', ' ']
+def test_cleaning_pipeline(get_df_to_clean):
+    data = {
+        'league_match': [2, 3, 4],
+        'team_1': ['madrid', 'valencia', 'Gimnàstic']
+    }
+    expected_df = pd.DataFrame(data)
 
     matches_pipeline = Pipeline([
         RemoveFirstLeagueMatch(),
-        RemoveSpecialCharacters(['team_1', 'team_2'], characters),
-        RenameTeams(['team_1', 'team_2'], {'Gimnàstic Tarragona': 'Gimnàstic'})
+        RemoveSpecialCharacters(['team_1'], ['\n', '*', ' ']),
+        RenameTeams(['team_1'], {'Gimnàstic Tarragona': 'Gimnàstic'})
     ])
+    cleaned_df = matches_pipeline.transform(get_df_to_clean)
 
-    rank_pipeline = Pipeline([
-        RemoveSpecialCharacters(['team'], characters)
-    ])
-
-    matches_df_trans = matches_pipeline.transform(matches_df)
-    rank_df_trans = rank_pipeline.transform(rank_df)
-
-    assert_frame_equal(matches_df_trans, expected_matches_df)
-    assert_frame_equal(rank_df_trans, expected_rank_df)
+    assert_frame_equal(cleaned_df, expected_df)
