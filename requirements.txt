@@ -4,3 +4,6 @@ pytest
 pyyaml
 selenium
 scikit-learn
+fastapi
+uvicorn
+xgboost
