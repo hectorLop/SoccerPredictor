@@ -1,5 +1,4 @@
 from fastapi import requests
-from flask import Flask, jsonify, request
 from xgboost import XGBClassifier
 from src.preprocessing.model_preprocessing import ModelPreprocesser
 from src.preprocessing.model_preprocessing import FeatureSelector
