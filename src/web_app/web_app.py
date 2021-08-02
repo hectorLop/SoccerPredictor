@@ -171,7 +171,8 @@ features = {
 # Predicting Star Rating
 
 if st.button('Predict'):
-    x = requests.post('http://localhost:5000/predict', json=features)
+    # The request is made to the docker-compose service name (api)
+    x = requests.post('http://api:8080/predict', json=features)
     x = json.loads(x.content)
     winner = x['data']['winner']
 

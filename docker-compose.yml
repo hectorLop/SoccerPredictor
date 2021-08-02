@@ -1,8 +1,14 @@
 version: '3'
 services:
-  web:
+  api:
     build: 
         context:  .
         dockerfile: src/api/Dockerfile
     ports:
-     - "8080:8080"
+      - "8080:8080"
+  web_app:
+    build:
+        context: .
+        dockerfile: src/web_app/Dockerfile
+    ports:
+      - "8501:8501"
