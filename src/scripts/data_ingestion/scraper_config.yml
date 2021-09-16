@@ -1,0 +1,15 @@
+matches_data:
+  url: 'https://www.resultados-futbol.com/primera{}/grupo1/jornada{}'
+  starter_league_match: 1
+  end_league_match: 1
+  starter_season: 1999
+  end_season: 1999
+  teams_xpath: "//span[@class='summary hidden']"
+  results_xpath: "//span[@class='clase']"
+ranks_data:
+  url: 'https://www.resultados-futbol.com/primera{}/grupo1/jornada{}'
+  starter_league_match: 1
+  end_league_match: 1
+  starter_season: 1999
+  end_season: 1999
+updated_url: 'https://www.resultados-futbol.com/primera/grupo1/jornada'
