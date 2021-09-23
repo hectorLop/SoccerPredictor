@@ -19,6 +19,7 @@ class DataParser():
                 
                 cleaned_data += parsed_data
             except:
+                logger.error('Failed to parse ')
                 pass
             
         return cleaned_data
@@ -72,11 +73,12 @@ class RankingDataParser():
         ranking_data = ranking_data[9:-1]
 
         parsed_data = []
-
+        
         for i in range(0, len(ranking_data)):
-            if re.match('[A-Z][a-z]+', ranking_data[i]):
+            if re.match('[A-Z][a-z]+', normalize_unicode(ranking_data[i])):
                 data = ranking_data[i:i + 8]
-                
+                data[0] = normalize_unicode(data[0])
+
                 # Get the for and against goals (eg. 6:1)
                 for_goals, against_goals = data[5].split(':')
                 data = data[:5] + [for_goals, against_goals] + data[6:]
@@ -96,8 +98,8 @@ class ResultsDataParser():
 
         for i in range(0, len(data)):
             if data[i] == '-':
-                home_team = data[i - 1]
-                away_team = data[i + 1]
+                home_team = normalize_unicode(data[i - 1])
+                away_team = normalize_unicode(data[i + 1])
                 result = data[i + 2]
 
                 try:
@@ -138,3 +140,20 @@ class ResultsDataParser():
     def is_second_round(self, league_match):
         return int(league_match) >= 20
 
+def normalize_unicode(word):
+    normalMap = {'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A',
+             'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'ª': 'A',
+             'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E',
+             'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e',
+             'Í': 'I', 'Ì': 'I', 'Î': 'I', 'Ï': 'I',
+             'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+             'Ò': 'O', 'Ó': 'O', 'Ô': 'O', 'Õ': 'O', 'Ö': 'O',
+             'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'º': 'O',
+             'Ù': 'U', 'Ú': 'U', 'Û': 'U', 'Ü': 'U',
+             'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u',
+             'Ñ': 'N', 'ñ': 'n',
+             'Ç': 'C', 'ç': 'c',
+             '§': 'S',  '³': '3', '²': '2', '¹': '1'}
+    normalize = str.maketrans(normalMap)
+
+    return word.translate(normalize)
