@@ -75,7 +75,7 @@ class RankingDataParser():
         parsed_data = []
         
         for i in range(0, len(ranking_data)):
-            if re.match('[A-Z][a-z]+', normalize_unicode(ranking_data[i])):
+            if re.match('[A-Z]+\s?[A-Z]*[a-z]+', normalize_unicode(ranking_data[i])):
                 data = ranking_data[i:i + 8]
                 data[0] = normalize_unicode(data[0])
 
