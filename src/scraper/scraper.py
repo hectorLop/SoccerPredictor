@@ -2,7 +2,7 @@ import scrapy
 import logging
 import re
 
-from scraper.spiders import GeneralDataSpider, AwayDataSpider, HomeDataSpider
+from src.scraper.spiders import GeneralDataSpider, AwayDataSpider, HomeDataSpider
 from scrapy.crawler import CrawlerProcess
 from typing import Dict, Tuple, List
 from itertools import product
@@ -53,7 +53,8 @@ class Scraper():
             self._config['start_season'],
             self._config['end_season'] + 1
             )
-        league_match_range = range(self._config['start_league_match'], 31)
+        # There are 38 league matches per season
+        league_match_range = range(self._config['start_league_match'], 39)
         
         for season, league_match in product(season_range, league_match_range):
             # Stopping criteria
@@ -71,7 +72,7 @@ class Scraper():
                 general_url = self._config['general_url']
                 home_url = self._config['home_url']
                 away_url = self._config['away_url']
-
+            
             general_urls.append(general_url.format(season=season,
                                                   season_end=season+1,
                                                   league_match=league_match))
@@ -86,6 +87,7 @@ class Scraper():
 
     def scrap_data(self):
         soccer_urls, home_urls, away_urls = self._generate_urls()
+
         info = {
             'general': [],
             'home': [],
