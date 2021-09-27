@@ -1,12 +1,10 @@
-matches_data:
-  url: 'https://www.resultados-futbol.com/primera{}/grupo1/jornada{}'
-  max_league_match: 1
-  starter_season: 1999
-  end_season: 1999
-  teams_xpath: "//span[@class='summary hidden']"
-  results_xpath: "//span[@class='clase']"
-ranks_data:
-  url: 'https://www.resultados-futbol.com/primera{}/grupo1/jornada{}'
-  max_league_match: 1
-  starter_season: 1999
-  end_season: 1999
+start_season: 1999
+end_season: 1999
+start_league_match: 1
+end_league_match: 2
+general_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/'
+home_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/heim'
+away_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/auswaerts'
+general_url_2016: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag_2/{league_match}/'
+home_url_2016: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag_2/{league_match}/heim'
+away_url_2016: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag_2/{league_match}/auswaerts'

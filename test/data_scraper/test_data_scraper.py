@@ -1,27 +1,31 @@
 import pytest
 import os
-from src.data_scraper.scraper import SeleniumWebScraper
+import yaml
+
+from src.scraper.scraper import Scraper
+from src.scraper.utils import DataParser
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRAPER_CONFIG = os.path.join(THIS_DIR, 'test_scraper_config.yml')
 
-def test_data_scraper_get_matches_data():
-    driver = os.path.join(THIS_DIR, 'geckodriver')
-    scraper = SeleniumWebScraper(config_file=os.path.join(THIS_DIR, 'test_scraper_config.yml'),
-                                driver_path=driver)
+def test_parse_data():
+    # Get the scraper config
+    with open(SCRAPER_CONFIG) as file:
+        config = yaml.full_load(file)
 
-    data = scraper.get_matches_data()
+    # Create the scraper
+    scraper = Scraper(config)
 
-    assert data, 'Data retrieved is empty'
-    assert len(data) == 10
-    assert data[0][0] == 1999
+    # Get the data
+    data = scraper.scrap_data()
 
-def test_data_scraper_get_ranks_data():
-    driver = os.path.join(THIS_DIR, 'geckodriver')
-    scraper = SeleniumWebScraper(config_file=os.path.join(THIS_DIR, 'test_scraper_config.yml'),
-                                driver_path=driver)
+    parser = DataParser()
 
-    data = scraper.get_ranks_data()
+    general_ranking, results = parser.parse_general_data(data['general'])
+    home_ranking = parser.parse_home_away_data(data['home'])
+    away_ranking = parser.parse_home_away_data(data['away'])
 
-    assert data, 'Data retrieved is empty'
-    assert len(data) == 20
-    assert data[0][0] == 1999
+    assert general_ranking[0][:4] == ('1999', ' 1', 1, 'Deportivo')
+    assert home_ranking[0][:4] == ('1999', ' 1', 1, 'Deportivo')
+    assert away_ranking[0][:4] == ('1999', ' 1', 1, 'Rayo')
+    assert results[0][:3] == ('1999', ' 1', 'team_1')
