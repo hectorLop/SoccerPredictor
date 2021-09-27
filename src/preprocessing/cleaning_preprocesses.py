@@ -19,46 +19,24 @@ class RemoveSpecialCharacters():
 
     Parameters
     ----------
-    _characters : str
-        String containing the special characters to be removed.
-        Default are line breaks and whitespaces.
+    columns : str
+        Dataframe's columns to be checked.
 
     Attributes
     ----------
-    _characters : str
-        String containing the special characters to be removed
+    _columns : str
+        Dataframe's columns to be checked.
     """
-    def __init__(self, columns: List[str], characters: List[str]) -> None:
-        self._characters = ''.join(characters)
+    def __init__(self, columns: List[str]) -> None:
         self._columns = columns
 
     def __call__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
         for column in self._columns:
             # Check if the dataframe column is of type string
-            if not dataframe[column].dtype == 'O':
-                raise ValueError(f'{column} column must be of type string')
-            
-            # Remove the special characters
-            dataframe[column] = dataframe[column].apply(
-                                                self._remove_special_characters)
+            if dataframe[column].str.match(r'\W+').sum() > 0:
+                dataframe[column] = dataframe[column].str.replace(r'\W+', '')
 
         return dataframe
-
-    def _remove_special_characters(self, word: str) -> str:
-        """
-        Remove a certain set of characters from a word.
-
-        Parameters
-        ----------
-        word : str
-            Word to be cleaned
-
-        Returns
-        -------
-        str
-            Cleaned word
-        """
-        return word.strip(self._characters)
 
 class RemoveFirstLeagueMatch():
     """
@@ -75,17 +53,17 @@ class RemoveFirstLeagueMatch():
         
         return dataframe
 
-class RenameTeams():
-    """
-    Rename a certain set of teams
-    """
-    def __init__(self, columns: List[str], map_dict: Dict) -> None:
-        self._columns = columns
-        self._map_dict = map_dict
+# class RenameTeams():
+#     """
+#     Rename a certain set of teams
+#     """
+#     def __init__(self, columns: List[str], map_dict: Dict) -> None:
+#         self._columns = columns
+#         self._map_dict = map_dict
 
-    def __call__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
-        for column in self._columns:
-            # Replace the old names by the new ones
-            dataframe[column] = dataframe[column].replace(self._map_dict)
+#     def __call__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+#         for column in self._columns:
+#             # Replace the old names by the new ones
+#             dataframe[column] = dataframe[column].replace(self._map_dict)
 
-        return dataframe
+#         return dataframe

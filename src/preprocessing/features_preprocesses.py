@@ -9,17 +9,13 @@ class FeaturePreprocess(ABC):
     Abstract class which defines some common methods to the
     preprocesses intended to create features.
     """
-    def __init__(self, rank_df: pd.DataFrame,
+    def __init__(self, ranking_df: pd.DataFrame,
                 columns: List[str], new_columns: List[str]):
-        self.rank_df = rank_df
+        self.ranking_df = ranking_df
         self.columns = columns
         self.new_columns = new_columns
 
-    @abstractmethod
-    def __call__(self):
-        pass
-
-    def _retrieve_team_data(self, rank_df: pd.DataFrame, season: int,
+    def _retrieve_team_data(self, season: int,
                             league_match: int, team: str) -> np.ndarray:
         """
         Retrieve a team's statistics
@@ -43,11 +39,10 @@ class FeaturePreprocess(ABC):
         # Subtracts 1 to the league match because we want to retrieve
         # the statistics the teams have before playing a certain match
         league_match -= 1
-        
         # Retrieves the data from the dataframe
-        data = rank_df[(rank_df['season'] == season) 
-                    & (rank_df['league_match'] == league_match) 
-                    & (rank_df['team'] == team)].values[0]
+        data = self.ranking_df[(self.ranking_df['season'] == season) 
+                    & (self.ranking_df['league_match'] == league_match) 
+                    & (self.ranking_df['team'] == team)].values[0]
         
         return data
 
@@ -100,7 +95,7 @@ class FeaturePreprocess(ABC):
         season, league_match, team = self._get_parameters_to_search_team(df_row,
                                                                         team)
         
-        data = self._retrieve_team_data(rank_df, season, league_match, team)
+        data = self._retrieve_team_data(season, league_match, team)
 
         return data
 
@@ -108,135 +103,272 @@ class FeaturePreprocess(ABC):
         # Zip the columns and new columns to iterate through them
         for column, new_column in zip(self.columns, self.new_columns):
             dataframe[new_column] = dataframe.apply(self._compute_feature, 
-                                                    args=(self.rank_df, column),
-                                                    axis=1)
+                                                    args=(column,), axis=1)
 
         return dataframe
 
     @abstractmethod
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
         pass
-
-class ComputeGoalsConceded(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[11]
-
-class ComputeGoalsScored(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[10]
-
-class ComputeHomeWins(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[4]
-
-class ComputeAwayWins(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[5]
-
-class ComputeHomeLosses(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[6]
-
-class ComputeAwayLosses(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[7]
-
-class ComputeHomeDraws(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[8]
-
-class ComputeAwayDraws(FeaturePreprocess):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
-        
-        return data[9]
 
 class ComputeLeagueRankPosition(FeaturePreprocess):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
+        data = self._get_team_data(df_row, self.ranking_df, team)
         
         return data[2]
 
-class ComputeWinsStreak(FeaturePreprocess):
+class ComputeWins(FeaturePreprocess):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
+        data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[-3]
+        return data[5]
 
-class ComputeDrawsStreak(FeaturePreprocess):
+class ComputeDraws(FeaturePreprocess):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
+        data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[-2]
+        return data[6]
 
-class ComputeLossesStreak(FeaturePreprocess):
+class ComputeLosses(FeaturePreprocess):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
-                        team: str) -> int:
-        data = self._get_team_data(df_row, rank_df, team)
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
+        data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[-1]
+        return data[7]
+
+class ComputeGoalsScored(FeaturePreprocess):
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
+        data = self._get_team_data(df_row, self.ranking_df, team)
+        
+        return data[8]
+
+class ComputeGoalsConceded(FeaturePreprocess):
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
+        data = self._get_team_data(df_row, self.ranking_df, team)
+        
+        return data[9]
+
+def compute_win_features(general_ranking, home_ranking, away_ranking,
+                        results):
+
+    results = ComputeWins(general_ranking,
+                        ['team_1', 'team_2'],
+                        ['general_wins_t1', 'general_wins_t2'])(results)
+
+    results = ComputeWins(home_ranking,
+                        ['team_1', 'team_2'],
+                        ['home_wins_t1', 'home_wins_t2'])(results)
+
+    results = ComputeWins(away_ranking,
+                        ['team_1', 'team_2'],
+                        ['away_wins_t1', 'away_wins_t2'])(results)
+
+    return results
+
+def compute_draw_features(general_ranking, home_ranking, away_ranking,
+                        results):
+    results = ComputeDraws(general_ranking,
+                        ['team_1', 'team_2'],
+                        ['general_draws_t1', 'general_draws_t2'])(results)
+
+    results = ComputeDraws(home_ranking,
+                        ['team_1', 'team_2'],
+                        ['home_draws_t1', 'home_draws_t2'])(results)
+
+    results = ComputeDraws(away_ranking,
+                        ['team_1', 'team_2'],
+                        ['away_draws_t1', 'away_draws_t2'])(results)            
+
+    return results
+
+def compute_loss_features(general_ranking, home_ranking, away_ranking,
+                        results):
+    results = ComputeLosses(general_ranking,
+                        ['team_1', 'team_2'],
+                        ['general_losses_t1', 'general_losses_t2'])(results)
+
+    results = ComputeLosses(home_ranking,
+                        ['team_1', 'team_2'],
+                        ['home_losses_t1', 'home_losses_t2'])(results)
+
+    results = ComputeLosses(away_ranking,
+                        ['team_1', 'team_2'],
+                        ['away_losses_t1', 'away_losses_t2'])(results)            
+
+    return results
+
+def compute_goals_scored(general_ranking, home_ranking, away_ranking,
+                        results):
+    results = ComputeGoalsScored(
+                general_ranking,
+                ['team_1', 'team_2'],
+                ['general_goals_scored_t1', 'general_goals_scored_t2'])(results)
+
+    results = ComputeGoalsScored(home_ranking,
+                ['team_1', 'team_2'],
+                ['home_goals_scored_t1', 'home_goals_scored_t2'])(results)
+
+    results = ComputeGoalsScored(away_ranking,
+                ['team_1', 'team_2'],
+                ['away_goals_scored_t1', 'away_goals_scored_t2'])(results)
+
+    return results
+
+def compute_goals_conceded(general_ranking, home_ranking, away_ranking,
+                        results):
+    results = ComputeGoalsConceded(
+        general_ranking,
+        ['team_1', 'team_2'],
+        ['general_goals_conceded_t1', 'general_goals_conceded_t2'])(results)
+
+    results = ComputeGoalsConceded(
+        home_ranking,
+        ['team_1', 'team_2'],
+        ['home_goals_conceded_t1', 'home_goals_conceded_t2'])(results)
+
+    results = ComputeGoalsConceded(
+        away_ranking,
+        ['team_1', 'team_2'],
+        ['away_goals_conceded_t1', 'away_goals_conceded_t2'])(results)
+
+    return results
+
+# class ComputeGoalsConceded(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[11]
+
+# class ComputeGoalsScored(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[10]
+
+# class ComputeHomeWins(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[4]
+
+# class ComputeAwayWins(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[5]
+
+# class ComputeHomeLosses(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[6]
+
+# class ComputeAwayLosses(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[7]
+
+# class ComputeHomeDraws(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[8]
+
+# class ComputeAwayDraws(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[9]
+
+# class ComputeLeagueRankPosition(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[2]
+
+# class ComputeWinsStreak(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[-3]
+
+# class ComputeDrawsStreak(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[-2]
+
+# class ComputeLossesStreak(FeaturePreprocess):
+#     def __init__(self, *args):
+#         super().__init__(*args)
+
+#     def _compute_feature(self, df_row: np.ndarray, rank_df: pd.DataFrame,
+#                         team: str) -> int:
+#         data = self._get_team_data(df_row, rank_df, team)
+        
+#         return data[-1]
 
 class FeaturePipeline():
     def __init__(self, preprocesses: List[FeaturePreprocess]) -> None:
