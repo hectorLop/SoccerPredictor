@@ -1,0 +1,371 @@
+season,league_match,home,team_1,team_2,outcome
+1999,2,team_1,Alaves,Malaga,team_1
+1999,2,team_1,Betis,Deportivo,draw
+1999,2,team_1,Celta,Sevilla,team_1
+1999,2,team_1,Espanyol,Valencia,team_1
+1999,2,team_1,Rayo,Mallorca,team_1
+1999,2,team_1,Real Madrid,Numancia,team_1
+1999,2,team_1,Real Racing,Barcelona,team_2
+1999,2,team_1,Real Sociedad,Atletico,team_1
+1999,2,team_1,Valladolid,Athletic,team_1
+1999,2,team_1,Zaragoza,Real Oviedo,team_1
+1999,3,team_1,Athletic,Real Madrid,draw
+1999,3,team_1,Atletico,Celta,team_2
+1999,3,team_1,Barcelona,Espanyol,team_1
+1999,3,team_1,Deportivo,Valladolid,team_1
+1999,3,team_1,Malaga,Betis,team_1
+1999,3,team_1,Mallorca,Numancia,team_1
+1999,3,team_1,Rayo,Real Sociedad,team_1
+1999,3,team_1,Real Oviedo,Real Racing,team_2
+1999,3,team_1,Sevilla,Zaragoza,draw
+1999,3,team_1,Valencia,Alaves,team_2
+1999,4,team_1,Alaves,Barcelona,team_1
+1999,4,team_1,Betis,Valencia,team_1
+1999,4,team_1,Celta,Rayo,team_2
+1999,4,team_1,Espanyol,Real Oviedo,team_1
+1999,4,team_1,Numancia,Athletic,draw
+1999,4,team_1,Real Madrid,Deportivo,draw
+1999,4,team_1,Real Racing,Sevilla,draw
+1999,4,team_1,Real Sociedad,Mallorca,team_1
+1999,4,team_1,Valladolid,Malaga,team_1
+1999,4,team_1,Zaragoza,Atletico,draw
+1999,5,team_1,Atletico,Real Racing,team_1
+1999,5,team_1,Barcelona,Betis,team_1
+1999,5,team_1,Deportivo,Numancia,team_2
+1999,5,team_1,Malaga,Real Madrid,draw
+1999,5,team_1,Mallorca,Athletic,team_1
+1999,5,team_1,Rayo,Zaragoza,team_2
+1999,5,team_1,Real Oviedo,Alaves,team_1
+1999,5,team_1,Real Sociedad,Celta,team_2
+1999,5,team_1,Sevilla,Espanyol,team_2
+1999,5,team_1,Valencia,Valladolid,draw
+1999,6,team_1,Alaves,Sevilla,draw
+1999,6,team_1,Athletic,Deportivo,team_2
+1999,6,team_1,Betis,Real Oviedo,team_1
+1999,6,team_1,Celta,Mallorca,team_1
+1999,6,team_1,Espanyol,Atletico,team_1
+1999,6,team_1,Numancia,Malaga,draw
+1999,6,team_1,Real Madrid,Valencia,team_2
+1999,6,team_1,Real Racing,Rayo,draw
+1999,6,team_1,Valladolid,Barcelona,team_2
+1999,6,team_1,Zaragoza,Real Sociedad,team_1
+1999,7,team_1,Atletico,Alaves,team_1
+1999,7,team_1,Barcelona,Real Madrid,draw
+1999,7,team_1,Celta,Zaragoza,team_1
+1999,7,team_1,Malaga,Athletic,team_2
+1999,7,team_1,Mallorca,Deportivo,draw
+1999,7,team_1,Rayo,Espanyol,team_1
+1999,7,team_1,Real Oviedo,Valladolid,draw
+1999,7,team_1,Real Sociedad,Real Racing,team_2
+1999,7,team_1,Sevilla,Betis,team_1
+1999,7,team_1,Valencia,Numancia,team_1
+1999,8,team_1,Alaves,Rayo,team_2
+1999,8,team_1,Athletic,Valencia,team_1
+1999,8,team_1,Betis,Atletico,team_1
+1999,8,team_1,Deportivo,Malaga,team_1
+1999,8,team_1,Espanyol,Real Sociedad,draw
+1999,8,team_1,Numancia,Barcelona,draw
+1999,8,team_1,Real Madrid,Real Oviedo,draw
+1999,8,team_1,Real Racing,Celta,team_1
+1999,8,team_1,Valladolid,Sevilla,team_1
+1999,8,team_1,Zaragoza,Mallorca,team_1
+1999,9,team_1,Atletico,Valladolid,team_1
+1999,9,team_1,Barcelona,Athletic,team_1
+1999,9,team_1,Celta,Espanyol,team_1
+1999,9,team_1,Mallorca,Malaga,team_1
+1999,9,team_1,Rayo,Betis,team_2
+1999,9,team_1,Real Oviedo,Numancia,team_1
+1999,9,team_1,Real Sociedad,Alaves,draw
+1999,9,team_1,Sevilla,Real Madrid,draw
+1999,9,team_1,Valencia,Deportivo,team_1
+1999,9,team_1,Zaragoza,Real Racing,team_1
+1999,10,team_1,Alaves,Celta,team_1
+1999,10,team_1,Athletic,Real Oviedo,draw
+1999,10,team_1,Betis,Real Sociedad,team_1
+1999,10,team_1,Deportivo,Barcelona,team_1
+1999,10,team_1,Espanyol,Zaragoza,draw
+1999,10,team_1,Malaga,Valencia,draw
+1999,10,team_1,Numancia,Sevilla,team_1
+1999,10,team_1,Real Madrid,Atletico,team_2
+1999,10,team_1,Real Racing,Mallorca,draw
+1999,10,team_1,Valladolid,Rayo,team_2
+1999,11,team_1,Atletico,Numancia,draw
+1999,11,team_1,Barcelona,Malaga,team_2
+1999,11,team_1,Celta,Betis,team_1
+1999,11,team_1,Mallorca,Valencia,team_1
+1999,11,team_1,Rayo,Real Madrid,team_2
+1999,11,team_1,Real Oviedo,Deportivo,team_2
+1999,11,team_1,Real Racing,Espanyol,draw
+1999,11,team_1,Real Sociedad,Valladolid,team_1
+1999,11,team_1,Sevilla,Athletic,draw
+1999,11,team_1,Zaragoza,Alaves,team_1
+1999,12,team_1,Alaves,Real Racing,team_1
+1999,12,team_1,Athletic,Atletico,team_1
+1999,12,team_1,Betis,Zaragoza,team_1
+1999,12,team_1,Deportivo,Sevilla,team_1
+1999,12,team_1,Espanyol,Mallorca,team_2
+1999,12,team_1,Malaga,Real Oviedo,team_1
+1999,12,team_1,Numancia,Rayo,team_1
+1999,12,team_1,Real Madrid,Real Sociedad,draw
+1999,12,team_1,Valencia,Barcelona,team_1
+1999,12,team_1,Valladolid,Celta,team_2
+1999,13,team_1,Atletico,Deportivo,team_2
+1999,13,team_1,Celta,Real Madrid,team_1
+1999,13,team_1,Espanyol,Alaves,team_2
+1999,13,team_1,Mallorca,Barcelona,team_1
+1999,13,team_1,Rayo,Athletic,team_2
+1999,13,team_1,Real Oviedo,Valencia,draw
+1999,13,team_1,Real Racing,Betis,draw
+1999,13,team_1,Real Sociedad,Numancia,team_1
+1999,13,team_1,Sevilla,Malaga,draw
+1999,13,team_1,Zaragoza,Valladolid,draw
+1999,14,team_1,Alaves,Mallorca,draw
+1999,14,team_1,Athletic,Real Sociedad,draw
+1999,14,team_1,Barcelona,Real Oviedo,team_1
+1999,14,team_1,Betis,Espanyol,team_2
+1999,14,team_1,Deportivo,Rayo,team_1
+1999,14,team_1,Malaga,Atletico,team_2
+1999,14,team_1,Numancia,Celta,team_1
+1999,14,team_1,Real Madrid,Zaragoza,team_2
+1999,14,team_1,Valencia,Sevilla,team_1
+1999,14,team_1,Valladolid,Real Racing,team_1
+1999,15,team_1,Alaves,Betis,team_1
+1999,15,team_1,Atletico,Valencia,team_2
+1999,15,team_1,Celta,Athletic,draw
+1999,15,team_1,Espanyol,Valladolid,draw
+1999,15,team_1,Mallorca,Real Oviedo,draw
+1999,15,team_1,Rayo,Malaga,team_1
+1999,15,team_1,Real Racing,Real Madrid,draw
+1999,15,team_1,Real Sociedad,Deportivo,team_2
+1999,15,team_1,Sevilla,Barcelona,team_1
+1999,15,team_1,Zaragoza,Numancia,draw
+1999,16,team_1,Athletic,Zaragoza,draw
+1999,16,team_1,Barcelona,Atletico,team_1
+1999,16,team_1,Betis,Mallorca,team_1
+1999,16,team_1,Deportivo,Celta,team_1
+1999,16,team_1,Malaga,Real Sociedad,draw
+1999,16,team_1,Numancia,Real Racing,team_1
+1999,16,team_1,Real Madrid,Espanyol,team_1
+1999,16,team_1,Real Oviedo,Sevilla,team_1
+1999,16,team_1,Valencia,Rayo,team_1
+1999,16,team_1,Valladolid,Alaves,draw
+1999,17,team_1,Alaves,Real Madrid,team_2
+1999,17,team_1,Atletico,Real Oviedo,team_1
+1999,17,team_1,Betis,Valladolid,team_2
+1999,17,team_1,Celta,Malaga,team_2
+1999,17,team_1,Espanyol,Numancia,team_1
+1999,17,team_1,Mallorca,Sevilla,team_1
+1999,17,team_1,Rayo,Barcelona,draw
+1999,17,team_1,Real Racing,Athletic,draw
+1999,17,team_1,Real Sociedad,Valencia,draw
+1999,17,team_1,Zaragoza,Deportivo,team_1
+1999,18,team_1,Athletic,Espanyol,team_1
+1999,18,team_1,Barcelona,Real Sociedad,team_1
+1999,18,team_1,Deportivo,Real Racing,team_2
+1999,18,team_1,Malaga,Zaragoza,draw
+1999,18,team_1,Mallorca,Valladolid,draw
+1999,18,team_1,Numancia,Alaves,draw
+1999,18,team_1,Real Madrid,Betis,team_1
+1999,18,team_1,Real Oviedo,Rayo,team_1
+1999,18,team_1,Sevilla,Atletico,team_1
+1999,18,team_1,Valencia,Celta,draw
+1999,19,team_1,Alaves,Athletic,team_2
+1999,19,team_1,Atletico,Mallorca,team_1
+1999,19,team_1,Betis,Numancia,team_2
+1999,19,team_1,Celta,Barcelona,team_2
+1999,19,team_1,Espanyol,Deportivo,draw
+1999,19,team_1,Rayo,Sevilla,team_1
+1999,19,team_1,Real Racing,Malaga,team_2
+1999,19,team_1,Real Sociedad,Real Oviedo,draw
+1999,19,team_1,Valladolid,Real Madrid,team_2
+1999,19,team_1,Zaragoza,Valencia,team_1
+1999,20,team_2,Alaves,Deportivo,team_2
+1999,20,team_2,Betis,Athletic,team_2
+1999,20,team_2,Celta,Real Oviedo,team_2
+1999,20,team_2,Espanyol,Malaga,team_1
+1999,20,team_2,Rayo,Atletico,draw
+1999,20,team_2,Real Madrid,Mallorca,team_2
+1999,20,team_2,Real Racing,Valencia,draw
+1999,20,team_2,Real Sociedad,Sevilla,draw
+1999,20,team_2,Valladolid,Numancia,team_2
+1999,20,team_2,Zaragoza,Barcelona,draw
+1999,21,team_2,Athletic,Valladolid,team_2
+1999,21,team_2,Atletico,Real Sociedad,draw
+1999,21,team_2,Barcelona,Real Racing,team_2
+1999,21,team_2,Deportivo,Betis,team_2
+1999,21,team_2,Malaga,Alaves,team_1
+1999,21,team_2,Mallorca,Rayo,team_2
+1999,21,team_2,Numancia,Real Madrid,draw
+1999,21,team_2,Real Oviedo,Zaragoza,team_2
+1999,21,team_2,Sevilla,Celta,team_1
+1999,21,team_2,Valencia,Espanyol,team_1
+1999,22,team_2,Alaves,Valencia,team_1
+1999,22,team_2,Betis,Malaga,draw
+1999,22,team_2,Celta,Atletico,team_1
+1999,22,team_2,Espanyol,Barcelona,draw
+1999,22,team_2,Numancia,Mallorca,team_2
+1999,22,team_2,Real Madrid,Athletic,team_2
+1999,22,team_2,Real Racing,Real Oviedo,team_2
+1999,22,team_2,Real Sociedad,Rayo,team_2
+1999,22,team_2,Valladolid,Deportivo,team_2
+1999,22,team_2,Zaragoza,Sevilla,team_2
+1999,23,team_2,Athletic,Numancia,team_2
+1999,23,team_2,Atletico,Zaragoza,draw
+1999,23,team_2,Barcelona,Alaves,team_1
+1999,23,team_2,Deportivo,Real Madrid,team_2
+1999,23,team_2,Malaga,Valladolid,draw
+1999,23,team_2,Mallorca,Real Sociedad,team_2
+1999,23,team_2,Rayo,Celta,team_2
+1999,23,team_2,Real Oviedo,Espanyol,team_2
+1999,23,team_2,Sevilla,Real Racing,team_2
+1999,23,team_2,Valencia,Betis,team_2
+1999,24,team_2,Alaves,Real Oviedo,team_2
+1999,24,team_2,Athletic,Mallorca,draw
+1999,24,team_2,Betis,Barcelona,team_2
+1999,24,team_2,Celta,Real Sociedad,team_2
+1999,24,team_2,Espanyol,Sevilla,draw
+1999,24,team_2,Numancia,Deportivo,team_2
+1999,24,team_2,Real Madrid,Malaga,team_2
+1999,24,team_2,Real Racing,Atletico,team_2
+1999,24,team_2,Valladolid,Valencia,draw
+1999,24,team_2,Zaragoza,Rayo,draw
+1999,25,team_2,Atletico,Espanyol,draw
+1999,25,team_2,Barcelona,Valladolid,team_2
+1999,25,team_2,Deportivo,Athletic,team_2
+1999,25,team_2,Malaga,Numancia,team_2
+1999,25,team_2,Mallorca,Celta,team_2
+1999,25,team_2,Rayo,Real Racing,team_1
+1999,25,team_2,Real Oviedo,Betis,draw
+1999,25,team_2,Real Sociedad,Zaragoza,team_2
+1999,25,team_2,Sevilla,Alaves,draw
+1999,25,team_2,Valencia,Real Madrid,draw
+1999,26,team_2,Alaves,Atletico,team_2
+1999,26,team_2,Athletic,Malaga,draw
+1999,26,team_2,Betis,Sevilla,draw
+1999,26,team_2,Deportivo,Mallorca,team_2
+1999,26,team_2,Espanyol,Rayo,team_2
+1999,26,team_2,Numancia,Valencia,team_1
+1999,26,team_2,Real Madrid,Barcelona,team_2
+1999,26,team_2,Real Racing,Real Sociedad,draw
+1999,26,team_2,Valladolid,Real Oviedo,team_2
+1999,26,team_2,Zaragoza,Celta,team_2
+1999,27,team_2,Atletico,Betis,draw
+1999,27,team_2,Barcelona,Numancia,team_2
+1999,27,team_2,Celta,Real Racing,team_2
+1999,27,team_2,Malaga,Deportivo,team_2
+1999,27,team_2,Mallorca,Zaragoza,draw
+1999,27,team_2,Rayo,Alaves,team_1
+1999,27,team_2,Real Oviedo,Real Madrid,draw
+1999,27,team_2,Real Sociedad,Espanyol,team_2
+1999,27,team_2,Sevilla,Valladolid,team_1
+1999,27,team_2,Valencia,Athletic,team_2
+1999,28,team_2,Alaves,Real Sociedad,team_2
+1999,28,team_2,Athletic,Barcelona,team_1
+1999,28,team_2,Betis,Rayo,draw
+1999,28,team_2,Deportivo,Valencia,team_2
+1999,28,team_2,Espanyol,Celta,team_2
+1999,28,team_2,Malaga,Mallorca,draw
+1999,28,team_2,Numancia,Real Oviedo,draw
+1999,28,team_2,Real Madrid,Sevilla,team_2
+1999,28,team_2,Real Racing,Zaragoza,team_1
+1999,28,team_2,Valladolid,Atletico,team_2
+1999,29,team_2,Atletico,Real Madrid,draw
+1999,29,team_2,Barcelona,Deportivo,team_2
+1999,29,team_2,Celta,Alaves,draw
+1999,29,team_2,Mallorca,Real Racing,team_1
+1999,29,team_2,Rayo,Valladolid,team_2
+1999,29,team_2,Real Oviedo,Athletic,team_2
+1999,29,team_2,Real Sociedad,Betis,team_2
+1999,29,team_2,Sevilla,Numancia,team_2
+1999,29,team_2,Valencia,Malaga,draw
+1999,29,team_2,Zaragoza,Espanyol,draw
+1999,30,team_2,Alaves,Zaragoza,team_1
+1999,30,team_2,Athletic,Sevilla,draw
+1999,30,team_2,Betis,Celta,draw
+1999,30,team_2,Deportivo,Real Oviedo,team_2
+1999,30,team_2,Espanyol,Real Racing,team_2
+1999,30,team_2,Malaga,Barcelona,team_1
+1999,30,team_2,Numancia,Atletico,team_2
+1999,30,team_2,Real Madrid,Rayo,draw
+1999,30,team_2,Valencia,Mallorca,team_2
+1999,30,team_2,Valladolid,Real Sociedad,team_2
+1999,31,team_2,Atletico,Athletic,team_1
+1999,31,team_2,Barcelona,Valencia,team_2
+1999,31,team_2,Celta,Valladolid,draw
+1999,31,team_2,Mallorca,Espanyol,team_1
+1999,31,team_2,Rayo,Numancia,draw
+1999,31,team_2,Real Oviedo,Malaga,draw
+1999,31,team_2,Real Racing,Alaves,draw
+1999,31,team_2,Real Sociedad,Real Madrid,draw
+1999,31,team_2,Sevilla,Deportivo,team_1
+1999,31,team_2,Zaragoza,Betis,team_2
+1999,32,team_2,Alaves,Espanyol,draw
+1999,32,team_2,Athletic,Rayo,team_1
+1999,32,team_2,Barcelona,Mallorca,team_1
+1999,32,team_2,Betis,Real Racing,draw
+1999,32,team_2,Deportivo,Atletico,team_2
+1999,32,team_2,Malaga,Sevilla,team_2
+1999,32,team_2,Numancia,Real Sociedad,team_1
+1999,32,team_2,Real Madrid,Celta,team_2
+1999,32,team_2,Valencia,Real Oviedo,team_2
+1999,32,team_2,Valladolid,Zaragoza,draw
+1999,33,team_2,Atletico,Malaga,draw
+1999,33,team_2,Celta,Numancia,draw
+1999,33,team_2,Espanyol,Betis,team_2
+1999,33,team_2,Mallorca,Alaves,team_2
+1999,33,team_2,Rayo,Deportivo,team_2
+1999,33,team_2,Real Oviedo,Barcelona,team_2
+1999,33,team_2,Real Racing,Valladolid,draw
+1999,33,team_2,Real Sociedad,Athletic,team_2
+1999,33,team_2,Sevilla,Valencia,team_1
+1999,33,team_2,Zaragoza,Real Madrid,team_1
+1999,34,team_2,Athletic,Celta,team_2
+1999,34,team_2,Barcelona,Sevilla,team_2
+1999,34,team_2,Betis,Alaves,team_1
+1999,34,team_2,Deportivo,Real Sociedad,team_2
+1999,34,team_2,Malaga,Rayo,team_2
+1999,34,team_2,Numancia,Zaragoza,team_1
+1999,34,team_2,Real Madrid,Real Racing,team_1
+1999,34,team_2,Real Oviedo,Mallorca,draw
+1999,34,team_2,Valencia,Atletico,team_2
+1999,34,team_2,Valladolid,Espanyol,team_2
+1999,35,team_2,Alaves,Valladolid,team_2
+1999,35,team_2,Atletico,Barcelona,team_1
+1999,35,team_2,Celta,Deportivo,team_2
+1999,35,team_2,Espanyol,Real Madrid,team_1
+1999,35,team_2,Mallorca,Betis,team_2
+1999,35,team_2,Rayo,Valencia,team_1
+1999,35,team_2,Real Racing,Numancia,draw
+1999,35,team_2,Real Sociedad,Malaga,draw
+1999,35,team_2,Sevilla,Real Oviedo,team_1
+1999,35,team_2,Zaragoza,Athletic,draw
+1999,36,team_2,Athletic,Real Racing,draw
+1999,36,team_2,Barcelona,Rayo,team_1
+1999,36,team_2,Deportivo,Zaragoza,draw
+1999,36,team_2,Malaga,Celta,team_1
+1999,36,team_2,Numancia,Espanyol,team_2
+1999,36,team_2,Real Madrid,Alaves,team_1
+1999,36,team_2,Real Oviedo,Atletico,draw
+1999,36,team_2,Sevilla,Mallorca,team_1
+1999,36,team_2,Valencia,Real Sociedad,team_2
+1999,36,team_2,Valladolid,Betis,team_1
+1999,37,team_2,Alaves,Numancia,draw
+1999,37,team_2,Atletico,Sevilla,draw
+1999,37,team_2,Betis,Real Madrid,team_1
+1999,37,team_2,Celta,Valencia,draw
+1999,37,team_2,Espanyol,Athletic,draw
+1999,37,team_2,Rayo,Real Oviedo,team_1
+1999,37,team_2,Real Racing,Deportivo,draw
+1999,37,team_2,Real Sociedad,Barcelona,draw
+1999,37,team_2,Valladolid,Mallorca,team_2
+1999,37,team_2,Zaragoza,Malaga,team_2
+1999,38,team_2,Athletic,Alaves,team_2
+1999,38,team_2,Barcelona,Celta,draw
+1999,38,team_2,Deportivo,Espanyol,team_2
+1999,38,team_2,Malaga,Real Racing,draw
+1999,38,team_2,Mallorca,Atletico,team_1
+1999,38,team_2,Numancia,Betis,team_1
+1999,38,team_2,Real Madrid,Valladolid,team_1
+1999,38,team_2,Real Oviedo,Real Sociedad,team_1
+1999,38,team_2,Sevilla,Rayo,team_1
+1999,38,team_2,Valencia,Zaragoza,team_2
