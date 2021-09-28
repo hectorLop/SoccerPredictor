@@ -379,3 +379,6 @@ class FeaturePipeline():
             dataframe = preprocess(dataframe)
 
         return dataframe
+
+    def __call__(self, dataframe):
+        return self.transform(dataframe)
