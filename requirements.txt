@@ -7,3 +7,5 @@ scikit-learn
 fastapi
 uvicorn
 xgboost
+scrapy
+sqlalchemy
