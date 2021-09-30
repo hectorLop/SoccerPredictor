@@ -1,0 +1,4 @@
+outs:
+- md5: 06788e3b93340c445140df4aaabfc490
+  size: 80359
+  path: test_data.parquet
