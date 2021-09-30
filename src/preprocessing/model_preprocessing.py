@@ -1,22 +1,23 @@
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
+from datetime import datetime
 
 import numpy as np
-import os
 import pickle
+import pandas as pd
+
+from src.config.config import VARIABLES
 
 class ModelPreprocesser(BaseEstimator, TransformerMixin):
-    _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-
     def __init__(self, trained_pipeline : str = '') -> None:
         if trained_pipeline:
             self.pipeline = self._get_trained_pipeline(trained_pipeline)
         else:
             self.pipeline = self._get_pipeline()
 
-    def fit(self, X):
+    def fit(self, X, y=None):
         self.pipeline.fit(X)
 
         return self
@@ -53,11 +54,8 @@ class ModelPreprocesser(BaseEstimator, TransformerMixin):
         pipeline = Pipeline([
             ('feature_selector', FeatureSelector(['season', 'team_1', 'team_2',
                                                 'league_match'])),
-            ('goals_difference', GoalDifference()),
-            ('winratio', WinRatio()),
-            ('lossratio', LossRatio()),
-            ('drawratio', DrawRatio()),
-            ('prep', prep_pipeline)
+            ('prep', prep_pipeline),
+            ('feature_store', ToFeatureStore())
         ])
 
         return pipeline
@@ -66,87 +64,26 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
     def __init__(self, features):
         self.features = features
     
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
     
     def transform(self, X, y=None):
         return X.drop(self.features, axis=1)
-    
-class GoalDifference(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        pass
-    
-    def fit(self, X):
-        return self
-    
-    def transform(self, X, y=None):
-        X['goals_difference_t1'] = X['goals_scored_t1'] - X['goals_conceded_t1']
-        X['goals_difference_t2'] = X['goals_scored_t2'] - X['goals_conceded_t2']
 
-        return X
-    
-class WinRatio(BaseEstimator, TransformerMixin):
+class ToFeatureStore(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
-    
-    def fit(self, X):
+
+    def fit(self, X, y=None):
         return self
     
     def transform(self, X, y=None):
-        total_wins_t1 = X['home_wins_t1'] + X['away_wins_t1']
-        total_wins_t2 = X['home_wins_t2'] + X['away_wins_t2']
-        
-        
-        X['win_ratio_t1'] = total_wins_t1 / self._get_total_matches(X, 't1')
-        X['win_ratio_t2'] = total_wins_t2 / self._get_total_matches(X, 't2')
-        
-        return X
-        
-    def _get_total_matches(self, X, team: str):
-        return X[f'home_wins_{team}'] + X[f'away_wins_{team}'] + \
-               X[f'home_losses_{team}'] + X[f'away_losses_{team}'] + \
-               X[f'home_draws_{team}'] + X[f'away_draws_{team}']
-    
-class LossRatio(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        pass
-    
-    def fit(self, X):
-        return self
-    
-    def transform(self, X, y=None):
-        total_losses_t1 = X['home_losses_t1'] + X['away_losses_t1']
-        total_losses_t2 = X['home_losses_t2'] + X['away_losses_t2']
-        
-        
-        X['loss_ratio_t1'] = total_losses_t1 / self._get_total_matches(X, 't1')
-        X['loss_ratio_t2'] = total_losses_t2 / self._get_total_matches(X, 't2')
+        # Convert to a dataframe
+        X = pd.DataFrame(X, columns=VARIABLES)
+        # Adds an id to be used in the Feature Store
+        X['results_id'] = np.arange(len(X))
+        # Adds a timestamp to define the datetime where the features were created
+        now = datetime.now()
+        X['created_on'] = [datetime(now.year, now.month, now.day)] * len(X)
         
         return X
-        
-    def _get_total_matches(self, X, team: str):
-        return X[f'home_wins_{team}'] + X[f'away_wins_{team}'] + \
-               X[f'home_losses_{team}'] + X[f'away_losses_{team}'] + \
-               X[f'home_draws_{team}'] + X[f'away_draws_{team}']
-    
-class DrawRatio(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        pass
-    
-    def fit(self, X):
-        return self
-    
-    def transform(self, X, y=None):
-        total_draws_t1 = X['home_draws_t1'] + X['away_draws_t1']
-        total_draws_t2 = X['home_draws_t2'] + X['away_draws_t2']
-        
-        
-        X['draw_ratio_t1'] = total_draws_t1 / self._get_total_matches(X, 't1')
-        X['draw_ratio_t2'] = total_draws_t2 / self._get_total_matches(X, 't2')
-        
-        return X
-        
-    def _get_total_matches(self, X, team: str):
-        return X[f'home_wins_{team}'] + X[f'away_wins_{team}'] + \
-               X[f'home_losses_{team}'] + X[f'away_losses_{team}'] + \
-               X[f'home_draws_{team}'] + X[f'away_draws_{team}']
