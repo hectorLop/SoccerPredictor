@@ -15,11 +15,6 @@ import numpy as np
 import mlflow
 import mlflow.sklearn
 import pandas as pd
-import os
-import sys
-
-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(sys.path[0], 'src/models_pipelines/')
 
 def load_data():
     store = FeatureStore(repo_path=FEATURES_DIR)
@@ -81,6 +76,9 @@ def train_model(config):
     logger.info('Loading the data')
     X_train, X_test, y_train, y_test = load_data()
 
+    tracking_uri = 'http://ec2-3-19-209-222.us-east-2.compute.amazonaws.com:5000'
+    mlflow.set_tracking_uri(tracking_uri)
+
     with mlflow.start_run():
         logger.info('Creating the model')
         params = config['params']
@@ -107,7 +105,7 @@ def train_model(config):
         mlflow.log_metric('test_acc', test_acc)
 
         logger.info('Logging the model')
-        mlflow.sklearn.log_model(model, 'RandomForest')
+        mlflow.sklearn.log_model(model, config['name'])
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
