@@ -1,9 +1,19 @@
-from src.preprocessing.model_preprocessing import ModelPreprocesser
-from xgboost import XGBClassifier
-from sklearn.preprocessing import LabelEncoder
 from src.config.logger_config import logger
+from src.config.config import FEATURES_DIR, VARIABLES
+from feast import FeatureStore
+from datetime import datetime
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
 
-import pickle
+import warnings
+warnings.filterwarnings("ignore")
+
+import yaml
+import argparse
+import importlib
+import numpy as np
+import mlflow
+import mlflow.sklearn
 import pandas as pd
 import os
 import sys
@@ -11,37 +21,104 @@ import sys
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(sys.path[0], 'src/models_pipelines/')
 
-def transform_data(dataframe):
-    y_train = dataframe['outcome']
-    y_train = LabelEncoder().fit_transform(y_train)
-    dataframe = dataframe.drop('outcome', axis=1)
+def load_data():
+    store = FeatureStore(repo_path=FEATURES_DIR)
+    training_variables = ['training_data:' + variable for variable in VARIABLES]
+    test_variables = ['test_data:' + variable for variable in VARIABLES]
 
-    preprocesser = ModelPreprocesser()
-    transformed_data = preprocesser.fit_transform(dataframe)
-    pipeline = preprocesser.pipeline
+    training_data_ids = np.arange(6542)
+    test_data_ids = np.arange(1636)
 
-    with open(os.path.join(THIS_DIR, DATA_DIR + 'pipeline.pkl'), 'wb') as file:
-        pickle.dump(pipeline, file)
+    now = datetime.now()
+    training_timestamps = [datetime(now.year, now.month, now.day)] * len(training_data_ids)
+    test_timestamps = [datetime(now.year, now.month, now.day)] * len(test_data_ids)
 
-    return transformed_data, y_train
+    training_entity_df = pd.DataFrame({
+        'training_id': training_data_ids,
+        "event_timestamp": training_timestamps
+        })
+    testing_entity_df = pd.DataFrame({
+        'test_id': test_data_ids,
+        "event_timestamp": test_timestamps
+        })
 
-def train_model(X, y):
-    xgboost = XGBClassifier(num_class=3,
-                            learning_rate=0.01,
-                            max_depth=5,
-                            eval_metric='mlogloss',
-                            use_label_encoder=False)
+    training_df = store.get_historical_features(
+        entity_df=training_entity_df,
+        features=training_variables
+    ).to_df()
 
-    xgboost.fit(X, y)
+    test_df = store.get_historical_features(
+        entity_df=testing_entity_df,
+        features=test_variables
+    ).to_df()
 
-    with open(os.path.join(THIS_DIR, DATA_DIR + 'xgboost_model.pkl'), 'wb') as file:
-        pickle.dump(xgboost, file)
+    y_train = training_df['outcome'].values
+    X_train = training_df.drop(['outcome', 'training_id', 'event_timestamp'],
+                                axis=1).values
+
+    y_test = test_df['outcome'].values
+    X_test = test_df.drop(['outcome', 'test_id', 'event_timestamp'],
+                            axis=1).values
+
+    return X_train, X_test, y_train, y_test
+
+def get_object_from_str(path):
+    pm = path.rsplit(".", 1)
+
+    if len(pm) < 2:
+        raise Exception("'%s' does not exist as python class" % path)
+
+    mod = importlib.import_module(pm[0])
+
+    return getattr(mod, pm[1])
+
+def eval_model(test, preds):
+    acc = accuracy_score(test, preds)
+
+    return acc
+
+def train_model(config):
+    logger.info('Loading the data')
+    X_train, X_test, y_train, y_test = load_data()
+
+    with mlflow.start_run():
+        logger.info('Creating the model')
+        params = config['params']
+        model = get_object_from_str(config['model'])(**params)
+
+        logger.info('Training the model')
+        model.fit(X_train, y_train)
+        train_preds = model.predict(X_train)
+        train_acc = accuracy_score(y_train, train_preds)
+
+        logger.info('Cross validating the model')
+        scores = cross_val_score(model, X_train, y_train, cv=5)
+        val_acc = scores.mean()
+
+        logger.info('Testing the model')
+        test_preds = model.predict(X_test)
+        test_acc = accuracy_score(y_test, test_preds)
+
+        for param, value in params.items():
+            mlflow.log_param(param, value)
+
+        mlflow.log_metric('train_acc', train_acc)
+        mlflow.log_metric('val_acc', val_acc)
+        mlflow.log_metric('test_acc', test_acc)
+
+        logger.info('Logging the model')
+        mlflow.sklearn.log_model(model, 'RandomForest')
 
 if __name__ == '__main__':
-    dataframe = pd.read_csv(os.path.join(THIS_DIR, 'soccer_dataset.csv'))
-    dataframe = dataframe.rename(columns={'goals_conceced_t2': 'goals_conceded_t2'})
-    logger.info('Preprocessing data')
-    X, y = transform_data(dataframe)
-    logger.info('Training the model')
-    train_model(X, y)
-    logger.info('Model training completed. Generated new model and pipeline files.')
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-m', '--model',
+                    type=str,
+                    required=True,
+                    help='Model config file')
+    args = parser.parse_args()
+
+    with open(args.model) as file:
+        config = yaml.full_load(file)
+
+    train_model(config)
