@@ -1,7 +1,7 @@
 import pytest
 from numpy.testing import assert_array_equal
 
-from src.preprocessing.model_preprocessing import ModelPreprocesser
+#from src.preprocessing.model_preprocessing import ModelPreprocesser
 #from test.data.data_fixtures import get_transformed_test_data, get_features_df
 
 def test_model_preprocessing():
