@@ -1,19 +1,24 @@
 import pytest
-from numpy.testing import assert_array_equal
+import pandas as pd
 
-#from src.preprocessing.model_preprocessing import ModelPreprocesser
+from pandas._testing import assert_frame_equal
+from src.preprocessing.model_preprocessing import ModelPreprocesser
 #from test.data.data_fixtures import get_transformed_test_data, get_features_df
 
 def test_model_preprocessing():
-    assert True
-    # expected_test_data = get_transformed_test_data
-    # test_data = get_features_df
+    df = pd.read_csv('test/data/results_1999_transformed.csv')
 
-    # preprocesser = ModelPreprocesser()
+    preprocesser = ModelPreprocesser()
 
-    # y = test_data['outcome'].to_numpy()
-    # X = test_data.drop('outcome', axis=1)
+    y = df['outcome'].replace({
+        'team_1': 0,
+        'team_2': 1,
+        'draw': 2
+    })
+    X = df.drop('outcome', axis=1)
+    X_trans = preprocesser.fit_transform(X)
 
-    # X_trans = preprocesser.fit_transform(X)
+    expected_df = pd.read_csv('test/data/results_1999_feature_engineered.csv')
+    expected_df['created_on'] = expected_df['created_on'].apply(pd.to_datetime)
 
-    # assert_array_equal(X_trans, expected_test_data)
+    assert_frame_equal(X_trans, expected_df)

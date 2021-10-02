@@ -1,7 +1,7 @@
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
-from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from datetime import datetime
 
 import numpy as np
@@ -79,7 +79,7 @@ class ToFeatureStore(BaseEstimator, TransformerMixin):
     
     def transform(self, X, y=None):
         # Convert to a dataframe
-        X = pd.DataFrame(X, columns=VARIABLES)
+        X = pd.DataFrame(X, columns=VARIABLES[:-1])
         # Adds an id to be used in the Feature Store
         X['results_id'] = np.arange(len(X))
         # Adds a timestamp to define the datetime where the features were created
