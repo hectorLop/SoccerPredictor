@@ -1,4 +1,7 @@
 [core]
-    remote = storage
+    remote = remote
 ['remote "storage"']
     url = ../stores/blob
+['remote "remote"']
+    url = s3://hlopez-mlflow-bucket/data
+    credentialpath = /home/hectorlopez/.aws/credentials
