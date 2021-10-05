@@ -119,8 +119,14 @@ class ResultsDataParser():
         result = result.split(' ')[0]
         home_goals, visitor_goals = result.split(':')
         
-        outcome = self.get_outcome(home_goals, visitor_goals)
-        
+        try:
+            home_goals = int(home_goals)
+            visitor_goals = int(visitor_goals)
+
+            outcome = self.get_outcome(home_goals, visitor_goals)
+        except:
+            outcome = 'NA'
+
         if self.is_second_round(league_match): # Is first round
             if outcome == 'team_1':
                 return 'team_2'
@@ -130,12 +136,15 @@ class ResultsDataParser():
         return outcome
     
     def get_outcome(self, home_goals, visitor_goals):
+        print(home_goals, visitor_goals)
         if home_goals > visitor_goals:
             return 'team_1'
         elif home_goals < visitor_goals:
             return 'team_2'
+        elif home_goals == visitor_goals:
+            return 'draw'
         else:
-            return 'draw'    
+            return 'NA'    
         
     def is_second_round(self, league_match):
         return int(league_match) >= 20
