@@ -1,5 +1,7 @@
+from pathlib import Path
+import pickle
 from src.config.logger_config import logger
-from src.config.config import FEATURES_DIR, VARIABLES
+from src.config.config import FEATURES_DIR, VARIABLES, DATA_DIR
 from feast import FeatureStore
 from datetime import datetime
 from sklearn.metrics import accuracy_score
@@ -76,7 +78,7 @@ def train_model(config):
     logger.info('Loading the data')
     X_train, X_test, y_train, y_test = load_data()
 
-    tracking_uri = 'http://ec2-3-19-209-222.us-east-2.compute.amazonaws.com:5000'
+    tracking_uri = 'http://ec2-54-154-10-25.eu-west-1.compute.amazonaws.com:5000'
     mlflow.set_tracking_uri(tracking_uri)
 
     with mlflow.start_run():
@@ -106,6 +108,9 @@ def train_model(config):
 
         logger.info('Logging the model')
         mlflow.sklearn.log_model(model, config['name'])
+
+    with open(Path(DATA_DIR, 'model.pkl'), 'wb') as file:
+        pickle.dump(model, file)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

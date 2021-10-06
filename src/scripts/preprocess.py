@@ -1,4 +1,5 @@
-from src.config.config import FEATURES_DIR, DATA_DIR
+from sklearn.base import OutlierMixin
+from src.config.config import DATA_DIR
 from src.config.logger_config import logger
 from src.preprocessing.model_preprocessing import ModelPreprocesser
 from sklearn.model_selection import train_test_split
@@ -6,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from pathlib import Path
 
 import pandas as pd
+import pickle
 
 def preprocess_data():
     df = pd.read_csv(Path(DATA_DIR, 'results_data.csv'))
@@ -28,6 +30,9 @@ def preprocess_data():
     X_train = preprocesser.fit_transform(X_train)
     logger.info('Preprocessing test data')
     X_test = preprocesser.transform(X_test)
+
+    with open(Path(DATA_DIR, 'prep_pipeline.pkl'), 'wb') as outfile:
+        pickle.dump(preprocesser, outfile)
 
     X_train = X_train.rename(columns={'results_id': 'training_id'})
     X_test = X_test.rename(columns={'results_id': 'test_id'})

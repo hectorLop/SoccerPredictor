@@ -1,0 +1,4 @@
+outs:
+- md5: c0df2ecc57d412c6b5e6733ae938bf75
+  size: 3873
+  path: prep_pipeline.pkl
