@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import yaml
 import pickle
+import json
+import boto3
+import os
 
 from pathlib import Path
 from src.scraper.scraper import Scraper
@@ -10,6 +13,9 @@ from src.preprocessing.features_preprocesses import get_feature_pipeline
 from src.preprocessing.model_preprocessing import ModelPreprocesser
 from src.config.config import CODE_DIR, DATA_DIR
 from src.config.logger_config import logger
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def load_data():
     scraper_config = Path(CODE_DIR, 'scraper/scraper_config.yml')
@@ -46,7 +52,9 @@ def load_data():
 
     data = data.drop(['results_id', 'created_on'], axis=1)
 
-    return data
+    teams = (results_df['team_1'].values, results_df['team_2'].values)
+
+    return data, teams, results_df['league_match'][0]
 
 def generate_preds(data):
     logger.info('GENERATING PREDICTIONS')
@@ -66,19 +74,46 @@ def create_dataframes(results, general_ranking, home_ranking, away_ranking):
 
     results_df = pd.DataFrame(results, columns=results_cols)
     #TODO: Check why the results come with the before league match number
-    results_df['league_match'] = results_df['league_match'] + 1
+    results_df['league_match'] = results_df['league_match']
 
     general_df = pd.DataFrame(general_ranking, columns=ranking_cols)
+    general_df['league_match'] = general_df['league_match'] - 1
 
     home_df = pd.DataFrame(home_ranking, columns=ranking_cols)
+    home_df['league_match'] = home_df['league_match'] - 1
 
     away_df = pd.DataFrame(away_ranking, columns=ranking_cols)
+    away_df['league_match'] = away_df['league_match'] - 1
 
     return results_df, general_df, home_df, away_df
 
+def parse_preds(preds, teams, league_match):
+    data = {
+        'league_match': int(league_match)
+    }
+
+    for i in range(len(preds)):
+        if preds[i] == 2:
+            outcome = 'draw'
+        else:
+            outcome = teams[preds[i]][i]
+
+        data[f'match_{i}'] = {
+            'team_1': teams[0][i],
+            'team_2': teams[1][i],
+            'outcome': outcome
+        }
+
+    s3_data = json.dumps(data)
+    bucket = os.getenv('AWS_BUCKET')
+    s3_client = boto3.client('s3')
+    s3_client.put_object(Body=s3_data,
+                        Bucket=bucket,
+                        Key='predictions/predictions.json')
+
 if __name__ == '__main__':
-    data = load_data()
+    data, teams, league_match = load_data()
     logger.info('DATA LOADING')
     preds = generate_preds(data)
-
-    print(preds)
+    logger.info('GENERATING PREDICTIONS FILE')
+    parse_preds(preds, teams, league_match)
