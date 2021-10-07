@@ -1,14 +1,29 @@
 version: '3'
 services:
-  api:
-    build: 
-        context:  .
-        dockerfile: src/api/Dockerfile
-    ports:
-      - "8080:8080"
-  web_app:
+  #api:
+  #  build: 
+   #     context:  .
+   #     dockerfile: src/api/Dockerfile
+ #   ports:
+   #   - "8080:8080"
+ # web_app:
+ #   build:
+  #      context: .
+  #      dockerfile: src/web_app/Dockerfile
+  #  ports:
+  #    - "8501:8501"
+  mlflow:
+  	restart: always
     build:
         context: .
-        dockerfile: src/web_app/Dockerfile
-    ports:
-      - "8501:8501"
+        dockerfile: infrastructure/mlflow/Dockerfile
+        image: mlflow_server
+        container_name: mlflow_server
+        expose:
+            - "5000:5000"
+        environment:
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+            - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
+        command: mlflow server -h 0.0.0.0 --default-artifact-root s3://${AWS_BUCKET_NAME}        
