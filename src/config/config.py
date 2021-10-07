@@ -5,6 +5,7 @@ BASE_DIR = Path(__file__).parent.parent.parent.absolute()
 DATA_DIR = Path(BASE_DIR, 'data')
 FEATURES_DIR = Path(BASE_DIR, 'features')
 STORES_DIR = Path(BASE_DIR, 'stores')
+CODE_DIR = Path(BASE_DIR, 'src')
 
 # Final Features
 VARIABLES = ['team_1', 'team_2', 'rank_t1', 'rank_t2', 'general_wins_t1',
