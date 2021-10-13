@@ -5,7 +5,7 @@ services:
           context: .
           dockerfile: src/web_app/Dockerfile
       image: streamlit_web_app
-      container_name: streamlit app
+      container_name: streamlit_web_app
       ports:
           - "8501:8501"
       command: streamlit run src/web_app/web_app.py
@@ -22,4 +22,15 @@ services:
           - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
           - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
           - AWS_DEFAULT_REGION=${AWS_REGION}
-      command: mlflow server -h 0.0.0.0 --default-artifact-root s3://${AWS_BUCKET_NAME}        
+      command: mlflow server -h 0.0.0.0 --default-artifact-root s3://${AWS_BUCKET_NAME}
+  postgres:
+      image: postgres:10.5
+      container_name: postgres_db
+      restart: always
+      environment:
+          - POSTGRES_USER=${POSTGRES_USER}
+          - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      ports:
+          - '5432:5432'
+      volumes: 
+          - ./postgres_data:/var/lib/postgresql/data 
