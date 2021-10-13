@@ -19,3 +19,5 @@ VARIABLES = ['team_1', 'team_2', 'rank_t1', 'rank_t2', 'general_wins_t1',
            'general_goals_conceded_t1', 'general_goals_conceded_t2',
            'home_goals_conceded_t1', 'home_goals_conceded_t2',
            'away_goals_conceded_t1', 'away_goals_conceded_t2', 'outcome']
+
+SCRAPER_CONFIG_FILE = Path(CODE_DIR, 'scraper/scraper_config.yml')

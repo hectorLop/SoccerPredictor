@@ -8,7 +8,7 @@ from src.db.data import Results, GeneralRanking, HomeRanking, AwayRanking
 from src.db.manager import DBManager
 from src.scraper.scraper import Scraper
 from src.scraper.utils import DataParser
-from src.config.constants import SCRAPER_CONFIG_FILE
+from src.config.config import SCRAPER_CONFIG_FILE
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -37,15 +37,6 @@ def retrieve_data(config: Optional[Dict] = None):
     }
 
     return data
-
-    # logger.info('Inserting results')
-    # insert_data(results, Results)
-    # logger.info('Inserting general ranking')
-    # insert_data(general_ranking, GeneralRanking)
-    # logger.info('Inserting home ranking')
-    # insert_data(home_ranking, HomeRanking)
-    # logger.info('Inserting away ranking')
-    # insert_data(away_ranking, AwayRanking)
 
 def ingest_data(data: Dict):
     logger.info('Inserting results')
