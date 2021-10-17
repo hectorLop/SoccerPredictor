@@ -3,56 +3,107 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class Match(Base):
-    __tablename__ = 'matches'
+class Results(Base):
+    __tablename__ = 'results'
 
-    match_id = Column(Integer, primary_key=True)
-    season = Column(Integer)
-    league_match = Column(Integer)
-    team_1 = Column(String(50))
-    team_2 = Column(String(50))
+    season = Column(Integer, primary_key=True)
+    league_match = Column(Integer, primary_key=True)
+    home = Column(String(50))
+    team_1 = Column(String(50), primary_key=True)
+    team_2 = Column(String(50), primary_key=True)
     outcome = Column(String(50))
 
-    def __init__(self, season, league_match, team_1, team_2, outcome):
+    def __init__(self, season, league_match, home, team_1, team_2, outcome):
         self.season = season
         self.league_match = league_match
+        self.home = home
         self.team_1 = team_1
         self.team_2 = team_2
         self.outcome = outcome
 
-class Rank(Base):
-    __tablename__ = 'ranking'
+class GeneralRanking(Base):
+    __tablename__ = 'general_ranking'
 
-    rank_id = Column(Integer, primary_key=True)
-    season = Column(Integer)
-    league_match = Column(Integer)
-    team = Column(String(50))
-    home_wins = Column(Integer)
-    away_wins = Column(Integer)
-    home_losses = Column(Integer)
-    away_losses = Column(Integer)
-    home_draws = Column(Integer)
-    away_draws = Column(Integer)
+    season = Column(Integer, primary_key=True)
+    league_match = Column(Integer, primary_key=True)
+    rank_pos = Column(Integer)
+    team = Column(String(50), primary_key=True)
+    matches = Column(Integer)
+    wins = Column(Integer)
+    draws = Column(Integer)
+    losses = Column(Integer)
     goals_scored = Column(Integer)
     goals_conceded = Column(Integer)
-    win_streak = Column(Integer)
-    draw_streak = Column(Integer)
-    loss_streak = Column(Integer)
+    goals_difference = Column(Integer)
 
-    def __init__(self, season, league_match, team, home_wins, away_wins,
-                home_losses, away_losses, home_draws, away_draws, goals_scored,
-                goals_conceded, win_streak, draw_streak, loss_streak):
+    def __init__(self, season, league_match, rank_pos, team, matches, wins,
+                draws, losses, goals_scored, goals_conceded, goals_difference):
         self.season = season
         self.league_match = league_match
+        self.rank_pos = rank_pos
         self.team = team
-        self.home_wins = home_wins
-        self.away_wins = away_wins
-        self.home_losses = home_losses
-        self.away_losses = away_losses
-        self.home_draws = home_draws
-        self.away_draws = away_draws
+        self.matches = matches
+        self.wins = wins
+        self.draws = draws
+        self.losses = losses
         self.goals_scored = goals_scored
         self.goals_conceded = goals_conceded
-        self.win_streak = win_streak
-        self.draw_streak = draw_streak
-        self.loss_streak = loss_streak
+        self.goals_difference = goals_difference
+
+class HomeRanking(Base):
+    __tablename__ = 'home_ranking'
+
+    season = Column(Integer, primary_key=True)
+    league_match = Column(Integer, primary_key=True)
+    rank_pos = Column(Integer)
+    team = Column(String(50), primary_key=True)
+    matches = Column(Integer)
+    wins = Column(Integer)
+    draws = Column(Integer)
+    losses = Column(Integer)
+    goals_scored = Column(Integer)
+    goals_conceded = Column(Integer)
+    goals_difference = Column(Integer)
+
+    def __init__(self, season, league_match, rank_pos, team, matches, wins,
+                draws, losses, goals_scored, goals_conceded, goals_difference):
+        self.season = season
+        self.league_match = league_match
+        self.rank_pos = rank_pos
+        self.team = team
+        self.matches = matches
+        self.wins = wins
+        self.draws = draws
+        self.losses = losses
+        self.goals_scored = goals_scored
+        self.goals_conceded = goals_conceded
+        self.goals_difference = goals_difference
+
+class AwayRanking(Base):
+    __tablename__ = 'away_ranking'
+
+    season = Column(Integer, primary_key=True)
+    league_match = Column(Integer, primary_key=True)
+    rank_pos = Column(Integer)
+    team = Column(String(50), primary_key=True)
+    matches = Column(Integer)
+    wins = Column(Integer)
+    draws = Column(Integer)
+    losses = Column(Integer)
+    goals_scored = Column(Integer)
+    goals_conceded = Column(Integer)
+    goals_difference = Column(Integer)
+
+    def __init__(self, season, league_match, rank_pos, team, matches, wins,
+                draws, losses, goals_scored, goals_conceded, goals_difference):
+        self.season = season
+        self.league_match = league_match
+        self.rank_pos = rank_pos
+        self.team = team
+        self.matches = matches
+        self.wins = wins
+        self.draws = draws
+        self.losses = losses
+        self.goals_scored = goals_scored
+        self.goals_conceded = goals_conceded
+        self.goals_difference = goals_difference
