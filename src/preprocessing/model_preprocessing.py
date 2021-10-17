@@ -3,6 +3,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from datetime import datetime
+from src.config.logger_config import logger
 
 import numpy as np
 import pickle
@@ -26,6 +27,22 @@ class ModelPreprocesser(BaseEstimator, TransformerMixin):
         X_trans = self.pipeline.transform(X)
 
         return X_trans
+
+    def fit_and_process_data(self, X_train, X_test, y_train, y_test):
+        logger.info('Preprocessing training data')
+        X_train = self.pipeline.fit_transform(X_train)
+        logger.info('Preprocessing test data')
+        X_test = self.pipeline.transform(X_test)
+
+        X_train = X_train.rename(columns={'results_id': 'training_id'})
+        X_test = X_test.rename(columns={'results_id': 'test_id'})
+
+        return X_train, X_test, y_train, y_test
+
+    def process_data(self, data):
+        data = self.pipeline.transform(data)
+
+        return data
 
     def _get_trained_pipeline(self, trained_pipeline : str):
         with open(trained_pipeline, 'rb') as file:
