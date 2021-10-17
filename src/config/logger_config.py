@@ -6,7 +6,11 @@ import os
 from pathlib import Path
 
 LOGS_DIR = os.path.join(sys.path[0], 'logs')
-print(LOGS_DIR)
+
+if not os.path.isdir(LOGS_DIR):
+    os.mkdir(LOGS_DIR)
+    with open(Path(LOGS_DIR, "info.log"), 'w'): pass
+    with open(Path(LOGS_DIR, "error.log"), 'w'): pass
 
 # Logger
 logging_config = {
