@@ -4,6 +4,7 @@ from pathlib import Path
 
 from src.config.config import CODE_DIR, DATA_DIR
 from src.config.logger_config import logger
+from src.preprocessing.cleaning_preprocesses import RemoveFirstLeagueMatch, RemoveWrongOutcome
 from src.preprocessing.data_retriever import DataRetriever
 from src.preprocessing.model_preprocessing import ModelPreprocesser
 from src.preprocessing.utils import get_training_test_sets
@@ -19,6 +20,7 @@ from dagster import solid, Output, OutputDefinition, execute_pipeline, pipeline
     ]
 )
 def get_raw_data(context):
+    logger.info('Data Preparation Pipeline: Getting the Raw Data')
     db_config = Path(CODE_DIR, 'db/db_config.yml')
     retriever = DataRetriever(db_config)
 
@@ -31,6 +33,13 @@ def get_raw_data(context):
 
 @solid
 def basic_preprocessing(context, results, general, home, away):
+    logger.info('Data Preparation Pipeline: Basic Preprocessing')
+    first_league_match_remover = RemoveFirstLeagueMatch()
+    remove_wrong_outcome = RemoveWrongOutcome()
+
+    results = first_league_match_remover(results)
+    results = remove_wrong_outcome(results)
+
     feature_pipeline = get_feature_pipeline(general, home, away)
     data = feature_pipeline(results)
 
@@ -45,6 +54,8 @@ def basic_preprocessing(context, results, general, home, away):
     ]
 )
 def data_split(context, data):
+    logger.info('Data Preparation Pipeline: Data Split')
+
     X_train, X_test, y_train, y_test = get_training_test_sets(data)
     
     yield Output(X_train, 'X_train')
@@ -54,6 +65,7 @@ def data_split(context, data):
     
 @solid
 def model_preprocessing(context, X_train, X_test, y_train, y_test):
+    logger.info('Data Preparation Pipeline: Model Preprocessing')
     preprocesser = ModelPreprocesser()
 
     X_train, X_test, y_train, y_test = preprocesser.fit_and_process_data(X_train,
@@ -67,8 +79,8 @@ def model_preprocessing(context, X_train, X_test, y_train, y_test):
     X_train = X_train.rename(columns={'results_id': 'training_id'})
     X_test = X_test.rename(columns={'results_id': 'test_id'})
 
-    X_train['outcome'] = y_train.values
-    X_test['outcome'] = y_test.values
+    X_train['outcome'] = y_train
+    X_test['outcome'] = y_test
 
     logger.info('Creating parquet files')
     X_train.to_parquet(Path(DATA_DIR, 'training_data.parquet'))
@@ -76,15 +88,15 @@ def model_preprocessing(context, X_train, X_test, y_train, y_test):
 
 @pipeline
 def data_preparation_pipeline():
-    logger.info('Data Preparation Pipeline: Getting the Raw Data')
+    # Load data from the database
     results, general, home, away = get_raw_data()
-    logger.info('Data Preparation Pipeline: Basic Preprocessing')
+    # Join the data to create an unique dataset
     data = basic_preprocessing(results, general, home, away)
-    logger.info('Data Preparation Pipeline: Data Split')
+    # Split the data intro training and test sets
     X_train, X_test, y_train, y_test = data_split(data)
-    logger.info('Data Preparation Pipeline: Model Preprocessing')
+    # Preprocess the data to be ready to train the models
     model_preprocessing(X_train, X_test, y_train, y_test)
-    logger.info('DAGSTER: Data Preparation Pipeline Finished')
 
 if __name__ == '__main__':
     execute_pipeline(data_preparation_pipeline)
+    logger.info('DAGSTER: Data Preparation Pipeline Finished')
