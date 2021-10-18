@@ -3,6 +3,8 @@ import numpy as np
 
 from abc import ABC, abstractmethod
 from typing import Tuple, List
+from src.config.logger_config import logger
+from src.preprocessing.utils import FeaturePipeline
 
 class FeaturePreprocess(ABC):
     """
@@ -40,9 +42,13 @@ class FeaturePreprocess(ABC):
         # the statistics the teams have before playing a certain match
         league_match -= 1
         # Retrieves the data from the dataframe
-        data = self.ranking_df[(self.ranking_df['season'] == season) 
-                    & (self.ranking_df['league_match'] == league_match) 
-                    & (self.ranking_df['team'] == team)].values[0]
+        try:
+            data = self.ranking_df[(self.ranking_df['season'] == season) 
+                        & (self.ranking_df['league_match'] == league_match) 
+                        & (self.ranking_df['team'] == team)].values[0]
+        except Exception as ex:
+            logger.info(f'Preprocess: Error on {season} - {league_match}, {team}')
+            raise ex
         
         return data
 
@@ -249,19 +255,6 @@ def compute_goals_conceded(general_ranking, home_ranking, away_ranking,
         ['away_goals_conceded_t1', 'away_goals_conceded_t2'])(results)
 
     return results
-
-class FeaturePipeline():
-    def __init__(self, preprocesses: List[FeaturePreprocess]) -> None:
-        self.preprocesses = preprocesses
-
-    def transform(self, dataframe):
-        for preprocess in self.preprocesses:
-            dataframe = preprocess(dataframe)
-
-        return dataframe
-
-    def __call__(self, dataframe):
-        return self.transform(dataframe)
 
 def get_feature_pipeline(general, home, away):
     # Compute general, home and away wins
