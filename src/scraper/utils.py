@@ -33,14 +33,14 @@ class DataParser():
             try:
                 season, league_match = self._parse_season_and_league_match(element[0])
                 results, ranking = self._get_results_and_ranking(element[1])
-            
+                
                 parsed_ranking = ranking_parser.parse_ranking(ranking, season, league_match)
                 parsed_results = results_parser.parse_results(results, season, league_match)
 
                 cleaned_ranking += parsed_ranking
                 cleaned_results += parsed_results
             except:
-                logger.error('Failed to parse ')
+                logger.error('Failed to parse general data')
                 pass
                         
         return cleaned_ranking, cleaned_results
@@ -71,7 +71,7 @@ class RankingDataParser():
     def parse_ranking(self, ranking_data, season, league_match):
         # Remove useless data
         ranking_data = ranking_data[9:-1]
-
+        
         parsed_data = []
         
         for i in range(0, len(ranking_data)):
@@ -82,10 +82,22 @@ class RankingDataParser():
                 # Get the for and against goals (eg. 6:1)
                 for_goals, against_goals = data[5].split(':')
                 data = data[:5] + [for_goals, against_goals] + data[6:]
+                # Remove the team's league points
+                data = data[:-1]
 
+                new_data = []
+
+                for element in data:
+                    try:
+                        new_data.append(int(element))
+                    except:
+                        new_data.append(element)
+
+                #data = [int(element) for element in data]
                 rank_position = len(parsed_data) + 1
 
-                parsed_data.append((season, league_match, rank_position, *data))
+                parsed_data.append((int(season), int(league_match),
+                                    int(rank_position), *data))
 
         return parsed_data
 
@@ -109,7 +121,8 @@ class ResultsDataParser():
                     else:
                         home = 'team_1'
 
-                    parsed_results.append((season, league_match, home, home_team, away_team, outcome))
+                    parsed_results.append((int(season), int(league_match),
+                                        home, home_team, away_team, outcome))
                 except ValueError:
                     pass
                 
@@ -117,9 +130,9 @@ class ResultsDataParser():
 
     def parse_outcome(self, result, league_match):
         result = result.split(' ')[0]
-        home_goals, visitor_goals = result.split(':')
         
         try:
+            home_goals, visitor_goals = result.split(':')
             home_goals = int(home_goals)
             visitor_goals = int(visitor_goals)
 
@@ -136,7 +149,6 @@ class ResultsDataParser():
         return outcome
     
     def get_outcome(self, home_goals, visitor_goals):
-        print(home_goals, visitor_goals)
         if home_goals > visitor_goals:
             return 'team_1'
         elif home_goals < visitor_goals:
