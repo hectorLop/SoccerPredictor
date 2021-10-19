@@ -4,10 +4,10 @@ import numpy as np
 from pandas._testing import assert_frame_equal
 
 from src.preprocessing.cleaning_preprocesses import (
-    Pipeline,
     RemoveSpecialCharacters,
     RemoveFirstLeagueMatch,
 )
+from src.preprocessing.utils import FeaturePipeline
 from src.config.logger_config import logger
 from test.data.data_fixtures import get_df_to_clean
 
@@ -50,7 +50,7 @@ def test_cleaning_pipeline(get_df_to_clean):
     expected_df = pd.DataFrame(data)
 
     # Cleaning pipeline
-    cleaning_pipeline = Pipeline([
+    cleaning_pipeline = FeaturePipeline([
         RemoveFirstLeagueMatch(),
         RemoveSpecialCharacters(['team_1']),
     ])

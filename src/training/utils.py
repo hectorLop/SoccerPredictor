@@ -1,14 +1,18 @@
 from pathlib import Path
-from src.config.config import DATA_DIR
+import pickle
 from src.config.logger_config import logger
+from src.config.config import DATA_DIR
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 
-import pandas as pd
-import mlflow
-import importlib
-import pickle
+import warnings
+warnings.filterwarnings("ignore")
+
 import yaml
+import importlib
+import mlflow
+import mlflow.sklearn
+import pandas as pd
 
 def load_data():
     training_data_path = Path(DATA_DIR, 'training_data.parquet')
@@ -16,7 +20,7 @@ def load_data():
 
     training_df = pd.read_parquet(training_data_path)
     test_df = pd.read_parquet(test_data_path)
-    print(training_df.columns)
+    
     y_train = training_df['outcome'].values
     X_train = training_df.drop(['outcome', 'training_id', 'created_on'], axis=1).values
 

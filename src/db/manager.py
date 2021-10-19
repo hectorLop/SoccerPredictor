@@ -44,7 +44,7 @@ class DBManager():
 
     def _get_engine(self) -> None:
         data = f'{self._config["db_engine"]}://{os.getenv("DB_USER")}:'\
-                f'{os.getenv("DB_PASSWORD")}@{self._config["host"]}:'\
+                f'{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}:'\
                 f'{self._config["port"]}/{self._config["db_name"]}'
         
         engine = create_engine(data)
@@ -66,8 +66,10 @@ class DBManager():
                         limit(limit)
 
         result = self._session.execute(statement)
-        
-        return result.fetchall()
+
+        # The select return Row objects so we must call scalars() to return
+        # the desired Table mapping and all() to get all mappings as a list
+        return result.scalars().all()
 
     def select_ranking(self, table, team, season, league_match):
         statement = select(table).where((table.team == team) and
