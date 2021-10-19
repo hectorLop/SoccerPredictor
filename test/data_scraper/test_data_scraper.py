@@ -25,7 +25,7 @@ def test_parse_data():
     home_ranking = parser.parse_home_away_data(data['home'])
     away_ranking = parser.parse_home_away_data(data['away'])
 
-    assert general_ranking[0][:4] == ('1999', ' 1', 1, 'Deportivo')
-    assert home_ranking[0][:4] == ('1999', ' 1', 1, 'Deportivo')
-    assert away_ranking[0][:4] == ('1999', ' 1', 1, 'Rayo')
-    assert results[0][:3] == ('1999', ' 1', 'team_1')
+    assert general_ranking[0][:4] == (1999, 1, 1, 'Deportivo')
+    assert home_ranking[0][:4] == (1999, 1, 1, 'Deportivo')
+    assert away_ranking[0][:4] == (1999, 1, 1, 'Rayo')
+    assert results[0][:3] == (1999, 1, 'team_1')
