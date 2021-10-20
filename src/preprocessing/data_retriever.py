@@ -23,11 +23,31 @@ class DataRetriever:
         return results_df, general_df, home_df, away_df
 
     def get_result_dataframe(self, raw_results : List[Tuple]) -> pd.DataFrame:
-        results_df = pd.DataFrame(raw_results, columns=RESULTS_COLS)
+        data = []
+
+        for result in raw_results:
+            data.append((result.season, result.league_match, result.home,
+                        result.team_1, result.team_2, result.outcome))
+
+        results_df = pd.DataFrame(data, columns=RESULTS_COLS)
 
         return results_df
 
-    def get_ranking_dataframes(self, datasets: List[List[Tuple]]) -> pd.DataFrame:
-        dfs = (pd.DataFrame(dataset, columns=RANKING_COLS) for dataset in datasets)
+    def get_ranking_dataframes(self, datasets: List[List[Tuple]]) -> pd.DataFrame:    
+        new_datasets= []
+
+        for dataset in datasets:
+            data = []
+
+            for ranking in dataset:
+                data.append((ranking.season, ranking.league_match,
+                            ranking.rank_pos, ranking.team, ranking.matches,
+                            ranking.wins, ranking.draws, ranking.losses,
+                            ranking.goals_scored, ranking.goals_conceded,
+                            ranking.goals_difference))
+
+            new_datasets.append(data)
+
+        dfs = (pd.DataFrame(dataset, columns=RANKING_COLS) for dataset in new_datasets)
 
         return dfs
