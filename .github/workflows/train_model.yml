@@ -1,8 +1,8 @@
-name: CI/CD Pipeline
+name: Continuous Training Pipeline
 
 on: 
   workflow_dispatch:
-  
+
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
