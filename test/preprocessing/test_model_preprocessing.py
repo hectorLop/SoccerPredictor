@@ -1,8 +1,7 @@
 import pytest
 import pandas as pd
-from numpy.testing import assert_almost_equal
 
-from pandas._testing import assert_frame_equal
+from numpy.testing import assert_almost_equal
 from src.preprocessing.model_preprocessing import ModelPreprocesser
 
 def test_model_preprocessing():
