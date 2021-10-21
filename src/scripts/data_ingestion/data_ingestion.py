@@ -8,7 +8,7 @@ from src.db.data import Results, GeneralRanking, HomeRanking, AwayRanking
 from src.db.manager import DBManager
 from src.scraper.scraper import Scraper
 from src.scraper.utils import DataParser
-from src.config.config import SCRAPER_CONFIG_FILE
+from src.config.config import SCRAPER_CONFIG_FILE, CODE_DIR
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -48,9 +48,8 @@ def ingest_data(data: Dict):
     logger.info('Inserting away ranking')
     insert_data(data['away_ranking'], AwayRanking)
 
-
 def insert_data(data: List, table):
-    manager = DBManager(os.path.join(THIS_DIR, 'db_config.yml'))
+    manager = DBManager(os.path.join(CODE_DIR, 'db/db_config.yml'))
 
     manager.insert(data, table)
     manager.close()
