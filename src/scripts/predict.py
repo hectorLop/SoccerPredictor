@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import yaml
 import pickle
@@ -45,7 +44,7 @@ def load_data():
 
     logger.info('CREATING PREPROCESSING PIPELINE')
     with open(Path(DATA_DIR, 'prep_pipeline.pkl'), 'rb') as file:
-        preprocesser_pipeline = pickle.load(file)
+        preprocesser_pipeline = pickle.load(file)   
 
     data = data.drop('outcome', axis=1)
     data = preprocesser_pipeline.transform(data)
@@ -73,7 +72,6 @@ def create_dataframes(results, general_ranking, home_ranking, away_ranking):
                     'goals_conceded', 'goals_difference']
 
     results_df = pd.DataFrame(results, columns=results_cols)
-    #TODO: Check why the results come with the before league match number
     results_df['league_match'] = results_df['league_match']
 
     general_df = pd.DataFrame(general_ranking, columns=ranking_cols)
@@ -112,8 +110,10 @@ def parse_preds(preds, teams, league_match):
                         Key='predictions/predictions.json')
 
 if __name__ == '__main__':
-    data, teams, league_match = load_data()
     logger.info('DATA LOADING')
+    data, teams, league_match = load_data()
+
     preds = generate_preds(data)
+
     logger.info('GENERATING PREDICTIONS FILE')
     parse_preds(preds, teams, league_match)
