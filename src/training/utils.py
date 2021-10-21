@@ -34,10 +34,14 @@ def train_model(config, X_train, X_test, y_train, y_test):
         config = yaml.full_load(file)
 
     tracking_uri = 'http://ec2-34-245-186-212.eu-west-1.compute.amazonaws.com:5000'
-    
     mlflow.set_tracking_uri(tracking_uri)
 
-    with mlflow.start_run():
+    mlflow.set_experiment('Soccer_Prediction')
+    experiment = mlflow.get_experiment_by_name('Soccer_Prediction')
+    experiemnt_id = experiment.experiment_id
+
+    with mlflow.start_run(experiment_id=experiemnt_id):
+        print(mlflow.get_artifact_uri())
         logger.info('Creating the model')
         params = config['params']
         model = get_object_from_str(config['model'])(**params)
@@ -63,7 +67,7 @@ def train_model(config, X_train, X_test, y_train, y_test):
         mlflow.log_metric('test_acc', test_acc)
 
         logger.info('Logging the model')
-        mlflow.sklearn.log_model(model, config['name'])
+        #mlflow.sklearn.log_model(model, config['name'])
 
     with open(Path(DATA_DIR, 'model.pkl'), 'wb') as file:
         pickle.dump(model, file)

@@ -1,7 +1,7 @@
-start_season: 2021
+start_season: 1999
 end_season: 2021
 start_league_match: 1
-end_league_match: 5
+end_league_match: 10
 general_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/'
 home_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/heim'
 away_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/auswaerts'
