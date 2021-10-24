@@ -100,10 +100,10 @@ def parse_preds(preds, teams, league_match):
             'team_2': teams[1][i],
             'outcome': outcome
         }
-    print(data)
-    # s3_data = json.dumps(data)
-    # bucket = os.getenv('AWS_BUCKET')
-    # s3_client = boto3.client('s3')
-    # s3_client.put_object(Body=s3_data,
-    #                     Bucket=bucket,
-    #                     Key='predictions/predictions.json')
+
+    s3_data = json.dumps(data)
+    bucket = os.getenv('AWS_BUCKET')
+    s3_client = boto3.client('s3')
+    s3_client.put_object(Body=s3_data,
+                        Bucket=bucket,
+                        Key='predictions/predictions.json')
