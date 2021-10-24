@@ -1,0 +1,10 @@
+start_season: 2021
+end_season: 2021
+start_league_match: 11
+end_league_match: 12
+general_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/'
+home_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/heim'
+away_url: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag/{league_match}/auswaerts'
+general_url_2016: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag_2/{league_match}/'
+home_url_2016: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag_2/{league_match}/heim'
+away_url_2016: 'https://www.livefutbol.com/calendario/esp-primera-division-{season}-{season_end}-spieltag_2/{league_match}/auswaerts'
