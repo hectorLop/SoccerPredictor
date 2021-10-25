@@ -1,9 +1,12 @@
+from typing import Optional
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from datetime import datetime
 from src.config.logger_config import logger
+from src.preprocessing.config import FEATURES_TO_DROP
+from src.preprocessing.utils import FeaturePipeline
 
 import numpy as np
 import pickle
@@ -67,10 +70,16 @@ class ModelPreprocesser(BaseEstimator, TransformerMixin):
             ('num', num_pipeline, make_column_selector(dtype_include=np.number))
         ])
 
+        feature_pipeline = Pipeline([
+            ('win_ratio', WinRatio()),
+            ('draw_ratio', DrawRatio()),
+            ('loss_ratio', LossRatio()),
+        ])
+
         # Final pipeline
         pipeline = Pipeline([
-            ('feature_selector', FeatureSelector(['season', 'team_1', 'team_2',
-                                                'league_match'])),
+            ('feature_pipeline', feature_pipeline),
+            ('feature_selector', FeatureSelector(FEATURES_TO_DROP)),
             ('prep', prep_pipeline),
             ('feature_store', ToFeatureStore())
         ])
@@ -103,4 +112,61 @@ class ToFeatureStore(BaseEstimator, TransformerMixin):
         now = datetime.now()
         X['created_on'] = [datetime(now.year, now.month, now.day)] * len(X)
         
+        return X
+
+class WinRatio(BaseEstimator, TransformerMixin):
+    def __init__(self) -> None:
+        pass
+
+    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+        return self
+
+    def transform(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+        X['home_win_ratio_t1'] = X['home_wins_t1'] / X['league_match']
+        X['home_win_ratio_t2'] = X['home_wins_t2'] / X['league_match']
+
+        X['away_win_ratio_t1'] = X['away_wins_t1'] / X['league_match']
+        X['away_win_ratio_t2'] = X['away_wins_t2'] / X['league_match']
+
+        # X['home_win_ratio_t1'] = X['general_wins_t1'] / X['league_match']
+        # X['home_win_ratio_t2'] = X['general_wins_t2'] / X['league_match']
+
+        return X
+
+class DrawRatio(BaseEstimator, TransformerMixin):
+    def __init__(self) -> None:
+        pass
+
+    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+        return self
+
+    def transform(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+        X['home_draw_ratio_t1'] = X['home_draws_t1'] / X['league_match']
+        X['home_draw_ratio_t2'] = X['home_draws_t2'] / X['league_match']
+
+        X['away_draw_ratio_t1'] = X['away_draws_t1'] / X['league_match']
+        X['away_draw_ratio_t2'] = X['away_draws_t2'] / X['league_match']
+
+        # X['home_win_ratio_t1'] = X['general_wins_t1'] / X['league_match']
+        # X['home_win_ratio_t2'] = X['general_wins_t2'] / X['league_match']
+
+        return X
+
+class LossRatio(BaseEstimator, TransformerMixin):
+    def __init__(self) -> None:
+        pass
+
+    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+        return self
+
+    def transform(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+        X['home_loss_ratio_t1'] = X['home_losses_t1'] / X['league_match']
+        X['home_loss_ratio_t2'] = X['home_losses_t2'] / X['league_match']
+
+        X['away_loss_ratio_t1'] = X['away_losses_t1'] / X['league_match']
+        X['away_loss_ratio_t2'] = X['away_losses_t2'] / X['league_match']
+
+        # X['home_win_ratio_t1'] = X['general_wins_t1'] / X['league_match']
+        # X['home_win_ratio_t2'] = X['general_wins_t2'] / X['league_match']
+
         return X
