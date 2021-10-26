@@ -2,7 +2,7 @@
 
 This projects represents the entire infrastructure to predict the outcome of the Spanish soccer league LaLiga. It includes all the stages of the ML lifecycle, from data ingestion to inference.
 
-<img src="/home/hectorlopez/Datos/Proyectos/Spanish-LaLiga_Prediction/diagram/general_diagram.png" alt="general_diagram"  />
+<img src="diagram/general_diagram.png" alt="general_diagram"  />
 
 ## Tools
 
