@@ -78,7 +78,7 @@ class DBManager():
 
         result = self._session.execute(statement)
 
-        return result.fetchall()
+        return result.scalars().all()
 
     def select_result(self, table, team_1, team_2, season, league_match):
         statement = select(table).where((table.team_1 == team_1) and
@@ -88,7 +88,7 @@ class DBManager():
 
         result = self._session.execute(statement)
 
-        return result.fetchall()
+        return result.scalars().all()
 
     def close(self) -> None:
         self._session.close()
