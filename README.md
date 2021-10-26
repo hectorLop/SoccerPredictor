@@ -35,6 +35,28 @@ The following command will build and start all the services.
 docker-compose up -d --build
 ```
 
+## Workflows
+At the moment the workflows are defined in GitHub Actions. On the other hand the pipelines can be started manually with the following commands:
+
+**Data ingestion pipeline**
+```bash
+python -m src.dagster_pipeline.data_ingestion_pipeline
+```
+
+**Data preparation pipeline**
+```bash
+python -m src.dagster_pipeline.data_preparation_pipeline
+```
+
+**Model training pipeline**
+```bash
+python -m src.dagster_pipeline.train_pipeline
+```
+
+**Inference pipeline**
+```bash
+python -m src.dagster_pipeline.predict_pipeline
+```
 ## To Do
 
 - [ ] Automate the pipeline to be started when new the web page is updated with a new match outcome
