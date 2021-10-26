@@ -4,6 +4,8 @@ This projects represents the entire infrastructure to predict the outcome of the
 
 <img src="diagram/general_diagram.png" alt="general_diagram"  />
 
+Click [here](http://ec2-34-245-186-212.eu-west-1.compute.amazonaws.com:8501/) to visit the web app.
+
 ## Tools
 
 - **Dagster**: Used as workflow orchestration tool for the Data Ingestion pipeline, Data Preparation pipeline and the Model training pipeline
