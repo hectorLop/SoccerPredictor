@@ -2,27 +2,37 @@
 
 This projects represents the entire infrastructure to predict the outcome of the Spanish soccer league LaLiga. It includes all the stages of the ML lifecycle, from data ingestion to inference.
 
+It intends to provide reliable predictions. The system performance is measured using a test set. The most recent model metrics are the following:
+
+| Train Accuracy (%) | Validation Accuracy (%) | Test Accuracy (%)  |
+| :------------------| :-----------------------| :------------------|
+|        51.6        |          50.6           |        51.2        |
+
+Click [here](http://ec2-34-245-186-212.eu-west-1.compute.amazonaws.com:8501/) to visit the web app and see a demo of the predictions.
+
 <img src="diagram/general_diagram.png" alt="general_diagram"  />
 
-Click [here](http://ec2-34-245-186-212.eu-west-1.compute.amazonaws.com:8501/) to visit the web app.
+
 
 ## Tools
+This section describes the tech stack used for the development and the deployment of the system:
 
-- **Dagster**: Used as workflow orchestration tool for the Data Ingestion pipeline, Data Preparation pipeline and the Model training pipeline
+- **Dagster**: Used as a workflow orchestration tool for the Data Ingestion pipeline, Data Preparation pipeline, and the Model training pipeline
 - **Scrapy**: Used to scrape the data from the web
 - **PostgreSQL**: Used to store the data in its raw form
-- **Amazon S3 and DVC**: Data versioning in the cloud. We store in the same repository the data, the training pipeline and the model.
+- **Amazon S3 and DVC**: Data versioning in the cloud. We store in the same repository the data, the training pipeline, and the model.
 - **MLflow:** Used to keep track of the model training experiments.
-- **Streamlit:** Used to create a web app in order to show a demo of the project.
+- **Streamlit:** Used to create a web app to show a demo of the project.
 
 ## Environment Variables
+The system needs the following environment variables to be defined to work appropriately.
 
 | Environment Variables |
 | :-------------------- |
 | AWS_ACCESS_KEY_ID     |
+| AWS_SECRET_ACCESS_KEY |
 | AWS_BUCKET            |
 | AWS_REGION            |
-| AWS_SECRET_ACCESS_KEY |
 | DB_HOST               |
 | DB_PASSWORD           |
 | DB_USER               |
