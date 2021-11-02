@@ -2,7 +2,9 @@
 
 This projects represents the entire infrastructure to predict the outcome of the Spanish soccer league LaLiga. It includes all the stages of the ML lifecycle, from data ingestion to inference.
 
-<img src="/home/hectorlopez/Datos/Proyectos/Spanish-LaLiga_Prediction/diagram/general_diagram.png" alt="general_diagram"  />
+<img src="diagram/general_diagram.png" alt="general_diagram"  />
+
+Click [here](http://ec2-34-245-186-212.eu-west-1.compute.amazonaws.com:8501/) to visit the web app.
 
 ## Tools
 
@@ -35,6 +37,28 @@ The following command will build and start all the services.
 docker-compose up -d --build
 ```
 
+## Workflows
+At the moment the workflows are defined in GitHub Actions. On the other hand the pipelines can be started manually with the following commands:
+
+**Data ingestion pipeline**
+```bash
+python -m src.dagster_pipeline.data_ingestion_pipeline
+```
+
+**Data preparation pipeline**
+```bash
+python -m src.dagster_pipeline.data_preparation_pipeline
+```
+
+**Model training pipeline**
+```bash
+python -m src.dagster_pipeline.train_pipeline
+```
+
+**Inference pipeline**
+```bash
+python -m src.dagster_pipeline.predict_pipeline
+```
 ## To Do
 
 - [ ] Automate the pipeline to be started when new the web page is updated with a new match outcome
