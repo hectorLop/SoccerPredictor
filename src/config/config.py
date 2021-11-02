@@ -9,7 +9,7 @@ CODE_DIR = Path(BASE_DIR, 'src')
 
 # Final Features
 VARIABLES = [
-    'team_1', 'team_2', 'rank_t1', 'rank_t2', 'home_win_ratio_t1',
+    'rank_t1', 'rank_t2', 'home_win_ratio_t1',
     'home_win_ratio_t2', 'away_win_ratio_t1', 'away_win_ratio_t2',
     'home_draw_ratio_t1', 'home_draw_ratio_t2', 'away_draw_ratio_t1',
     'away_draw_ratio_t2', 'home_loss_ratio_t1', 'home_loss_ratio_t2',
@@ -19,5 +19,12 @@ VARIABLES = [
     'general_goals_conceded_t2', 'home_goals_conceded_t1',
     'home_goals_conceded_t2', 'away_goals_conceded_t1', 
     'away_goals_conceded_t2', 'outcome']
+
+DVC_FILES = [
+    'prep_pipeline.pkl.dvc',
+    'model.pkl.dvc',
+    'test_data.parquet.dvc',
+    'training_data.parquet.dvc',
+]
 
 SCRAPER_CONFIG_FILE = Path(CODE_DIR, 'scraper/scraper_config.yml')
