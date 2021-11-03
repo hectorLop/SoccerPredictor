@@ -66,7 +66,7 @@ class ModelPreprocesser(BaseEstimator, TransformerMixin):
 
         # Pipeline to transform columns
         prep_pipeline = ColumnTransformer([
-            ('cat', cat_pipeline, make_column_selector(dtype_include=object)),
+            ('cat', 'passthrough', make_column_selector(dtype_include=object)),
             ('num', num_pipeline, make_column_selector(dtype_include=np.number))
         ])
 
@@ -128,9 +128,6 @@ class WinRatio(BaseEstimator, TransformerMixin):
         X['away_win_ratio_t1'] = X['away_wins_t1'] / X['league_match']
         X['away_win_ratio_t2'] = X['away_wins_t2'] / X['league_match']
 
-        # X['home_win_ratio_t1'] = X['general_wins_t1'] / X['league_match']
-        # X['home_win_ratio_t2'] = X['general_wins_t2'] / X['league_match']
-
         return X
 
 class DrawRatio(BaseEstimator, TransformerMixin):
@@ -147,9 +144,6 @@ class DrawRatio(BaseEstimator, TransformerMixin):
         X['away_draw_ratio_t1'] = X['away_draws_t1'] / X['league_match']
         X['away_draw_ratio_t2'] = X['away_draws_t2'] / X['league_match']
 
-        # X['home_win_ratio_t1'] = X['general_wins_t1'] / X['league_match']
-        # X['home_win_ratio_t2'] = X['general_wins_t2'] / X['league_match']
-
         return X
 
 class LossRatio(BaseEstimator, TransformerMixin):
@@ -165,8 +159,5 @@ class LossRatio(BaseEstimator, TransformerMixin):
 
         X['away_loss_ratio_t1'] = X['away_losses_t1'] / X['league_match']
         X['away_loss_ratio_t2'] = X['away_losses_t2'] / X['league_match']
-
-        # X['home_win_ratio_t1'] = X['general_wins_t1'] / X['league_match']
-        # X['home_win_ratio_t2'] = X['general_wins_t2'] / X['league_match']
 
         return X
