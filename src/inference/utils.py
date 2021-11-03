@@ -14,6 +14,7 @@ import pickle
 import os
 import boto3
 import json
+import glob
 
 def get_last_data():
     scraper_config = Path(CODE_DIR, 'inference/scraper_inference_config.yaml')
@@ -67,8 +68,11 @@ def preprocess_for_inference(results_df, general_df, home_df, away_df):
         preprocesser_pipeline = pickle.load(file)   
 
     data = data.drop('outcome', axis=1)
-    data = preprocesser_pipeline.transform(data)
 
+    # There are columns that must be casted to integers
+    data.iloc[:, 6:] = data.iloc[:, 6:].astype(int)
+
+    data = preprocesser_pipeline.transform(data)
     data = data.drop(['results_id', 'created_on'], axis=1)
 
     teams = (results_df['team_1'].values, results_df['team_2'].values)
