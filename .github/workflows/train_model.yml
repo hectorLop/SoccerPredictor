@@ -47,3 +47,4 @@ jobs:
           dvc add data/prep_pipeline.pkl
           dvc add data/model.pkl
           dvc push
+          python -m src.scripts.upload_download_dvc -o upload

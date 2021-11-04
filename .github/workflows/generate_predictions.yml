@@ -27,5 +27,6 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
         run: |
+          python -m src.scripts.upload_download_dvc -o download
           dvc pull
           python -m src.dagster_pipeline.predict_pipeline
