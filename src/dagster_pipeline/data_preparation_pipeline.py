@@ -6,7 +6,7 @@ from src.config.config import CODE_DIR, DATA_DIR
 from src.config.logger_config import logger
 from src.preprocessing.cleaning_preprocesses import RemoveFirstLeagueMatch, RemoveWrongOutcome
 from src.preprocessing.data_retriever import DataRetriever
-from src.preprocessing.model_preprocessing import ModelPreprocesser
+from src.preprocessing.model_preprocessing import feature_eng_pipeline, fit_and_process_data
 from src.preprocessing.utils import get_training_test_sets
 from src.preprocessing.features_preprocesses import get_feature_pipeline
 from dagster import solid, Output, OutputDefinition, execute_pipeline, pipeline
@@ -66,18 +66,15 @@ def data_split(context, data):
 @solid
 def model_preprocessing(context, X_train, X_test, y_train, y_test):
     logger.info('Data Preparation Pipeline: Model Preprocessing')
-    preprocesser = ModelPreprocesser()
 
-    X_train, X_test, y_train, y_test = preprocesser.fit_and_process_data(X_train,
-                                                                        X_test,
-                                                                        y_train,
-                                                                        y_test)
+    prep_pipeline = feature_eng_pipeline()
+
+    X_train, X_test, y_train, y_test = fit_and_process_data(prep_pipeline,
+                                                            (X_train, y_train),
+                                                            (X_test, y_test))
                                                                 
     with open(Path(DATA_DIR, 'prep_pipeline.pkl'), 'wb') as outfile:
-        pickle.dump(preprocesser, outfile)
-
-    X_train = X_train.rename(columns={'results_id': 'training_id'})
-    X_test = X_test.rename(columns={'results_id': 'test_id'})
+        pickle.dump(prep_pipeline, outfile)
 
     X_train['outcome'] = y_train
     X_test['outcome'] = y_test
