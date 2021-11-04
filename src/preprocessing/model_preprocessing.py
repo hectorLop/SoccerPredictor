@@ -1,4 +1,5 @@
-from typing import Optional
+from __future__ import annotations
+from typing import Optional, Tuple
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
@@ -6,85 +7,92 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from datetime import datetime
 from src.config.logger_config import logger
 from src.preprocessing.config import FEATURES_TO_DROP
-from src.preprocessing.utils import FeaturePipeline
 
 import numpy as np
-import pickle
 import pandas as pd
 
 from src.config.config import VARIABLES
 
-class ModelPreprocesser(BaseEstimator, TransformerMixin):
-    def __init__(self, trained_pipeline : str = '') -> None:
-        if trained_pipeline:
-            self.pipeline = self._get_trained_pipeline(trained_pipeline)
-        else:
-            self.pipeline = self._get_pipeline()
+def feature_eng_pipeline() -> Pipeline:
+    """
+    Creates the pipeline to transform the data
 
-    def fit(self, X, y=None):
-        self.pipeline.fit(X)
+    Returns
+    -------
+    pipeline : Pipeline
+        Feature engineering pipeline.
+    """
+    # Categorical attributes pipeline
+    cat_pipeline = Pipeline([
+        ('encoder', OneHotEncoder())
+    ])
 
-        return self
+    # Numerical attributes pipeline
+    num_pipeline = Pipeline([
+        ('scaler', StandardScaler())
+    ])
 
-    def transform(self, X, y=None):
-        X_trans = self.pipeline.transform(X)
+    # Pipeline to transform columns
+    prep_pipeline = ColumnTransformer([
+        ('cat', 'passthrough', make_column_selector(dtype_include=object)),
+        ('num', num_pipeline, make_column_selector(dtype_include=np.number))
+    ])
 
-        return X_trans
+    feature_pipeline = Pipeline([
+        ('win_ratio', WinRatio()),
+        ('draw_ratio', DrawRatio()),
+        ('loss_ratio', LossRatio()),
+    ])
 
-    def fit_and_process_data(self, X_train, X_test, y_train, y_test):
-        logger.info('Preprocessing training data')
-        X_train = self.pipeline.fit_transform(X_train)
-        logger.info('Preprocessing test data')
-        X_test = self.pipeline.transform(X_test)
+    # Final pipeline
+    pipeline = Pipeline([
+        ('feature_pipeline', feature_pipeline),
+        ('feature_selector', FeatureSelector(FEATURES_TO_DROP)),
+        ('prep', prep_pipeline),
+        ('feature_store', ToFeatureStore())
+    ])
 
-        X_train = X_train.rename(columns={'results_id': 'training_id'})
-        X_test = X_test.rename(columns={'results_id': 'test_id'})
+    return pipeline
 
-        return X_train, X_test, y_train, y_test
+def fit_and_process_data(
+    pipeline : Pipeline,
+    train : Tuple[pd.DataFrame, np.ndarray],
+    test : Tuple[pd.DataFrame, np.ndarray]
+    ) -> Tuple[pd.DataFrame, pd.DataFrame, np.ndarray, np.ndarray]:
+    """
+    Fit the pipeline with the training data and uses the obtained insights
+    to transform both the training and test data.
 
-    def process_data(self, data):
-        data = self.pipeline.transform(data)
+    Parameters
+    ----------
+    pipeline : Pipeline
+        Preprocessing pipeline
+    train : Tuple[pd.DataFrame, np.ndarray]
+        Tuple containing the training data
+    test : Tuple[pd.DataFrame, np.ndarray]
+        Tuple containing the test data
 
-        return data
+    Returns
+    -------
+    Tuple[pd.DataFrame, pd.DataFrame, np.ndarray, np.ndarray]
+        Tuple containing the transformed training and test data
+    """
+    # Unpack the training and test data
+    X_train, y_train = train
+    X_test, y_test = test
 
-    def _get_trained_pipeline(self, trained_pipeline : str):
-        with open(trained_pipeline, 'rb') as file:
-            pipeline = pickle.load(file)
+    # Fit the pipeline and transform the training data
+    logger.info('Preprocessing training data')
+    X_train = pipeline.fit_transform(X_train)
+    # Transform the test data
+    logger.info('Preprocessing test data')
+    X_test = pipeline.transform(X_test)
 
-        return pipeline
+    # Rename id columns
+    X_train = X_train.rename(columns={'results_id': 'training_id'})
+    X_test = X_test.rename(columns={'results_id': 'test_id'})
 
-    def _get_pipeline(self):
-        # Categorical attributes pipeline
-        cat_pipeline = Pipeline([
-            ('encoder', OneHotEncoder())
-        ])
-
-        # Numerical attributes pipeline
-        num_pipeline = Pipeline([
-            ('scaler', StandardScaler())
-        ])
-
-        # Pipeline to transform columns
-        prep_pipeline = ColumnTransformer([
-            ('cat', 'passthrough', make_column_selector(dtype_include=object)),
-            ('num', num_pipeline, make_column_selector(dtype_include=np.number))
-        ])
-
-        feature_pipeline = Pipeline([
-            ('win_ratio', WinRatio()),
-            ('draw_ratio', DrawRatio()),
-            ('loss_ratio', LossRatio()),
-        ])
-
-        # Final pipeline
-        pipeline = Pipeline([
-            ('feature_pipeline', feature_pipeline),
-            ('feature_selector', FeatureSelector(FEATURES_TO_DROP)),
-            ('prep', prep_pipeline),
-            ('feature_store', ToFeatureStore())
-        ])
-
-        return pipeline
+    return X_train, X_test, y_train, y_test
 
 class FeatureSelector(BaseEstimator, TransformerMixin):
     def __init__(self, features):
@@ -118,7 +126,7 @@ class WinRatio(BaseEstimator, TransformerMixin):
     def __init__(self) -> None:
         pass
 
-    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None) -> WinRatio:
         return self
 
     def transform(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
@@ -134,7 +142,7 @@ class DrawRatio(BaseEstimator, TransformerMixin):
     def __init__(self) -> None:
         pass
 
-    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
+    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None) -> DrawRatio:
         return self
 
     def transform(self, X : pd.DataFrame, y : Optional[np.ndarray] = None):
