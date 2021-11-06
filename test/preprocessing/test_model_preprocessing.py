@@ -18,6 +18,6 @@ def test_model_preprocessing():
     X = df.drop('outcome', axis=1)
     X_trans = pipeline.fit_transform(X)
 
-    expected_variables = VARIABLES[:-1] + ['results_id', 'created_on']
+    expected_variables = VARIABLES[:-1] + ['created_on']
     
     assert expected_variables == list(X_trans.columns)
