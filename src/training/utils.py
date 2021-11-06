@@ -22,10 +22,10 @@ def load_data():
     test_df = pd.read_parquet(test_data_path)
     
     y_train = training_df['outcome'].values
-    X_train = training_df.drop(['outcome', 'training_id', 'created_on'], axis=1).values
+    X_train = training_df.drop(['outcome', 'created_on'], axis=1).values
 
     y_test = test_df['outcome'].values
-    X_test = test_df.drop(['outcome', 'test_id', 'created_on'], axis=1).values
+    X_test = test_df.drop(['outcome', 'created_on'], axis=1).values
 
     return X_train, X_test, y_train, y_test
 

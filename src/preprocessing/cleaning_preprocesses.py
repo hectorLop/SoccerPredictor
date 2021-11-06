@@ -2,17 +2,14 @@ from typing import Dict, List
 from src.preprocessing.utils import FeaturePipeline
 
 import pandas as pd
-import numpy as np
 
-# class Pipeline():
-#     def __init__(self, preprocesses: List) -> None:
-#         self.preprocesses = preprocesses
+def cleaning_pipeline():
+    pipeline = FeaturePipeline([
+        RemoveFirstLeagueMatch(),
+        RemoveWrongOutcome()
+    ])
 
-#     def transform(self, dataframe: pd.DataFrame):
-#         for preprocess in self.preprocesses:
-#             dataframe = preprocess(dataframe)
-
-#         return dataframe
+    return pipeline
 
 class RemoveSpecialCharacters():
     """

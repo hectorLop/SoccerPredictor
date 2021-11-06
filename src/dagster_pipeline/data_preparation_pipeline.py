@@ -4,7 +4,7 @@ from pathlib import Path
 
 from src.config.config import CODE_DIR, DATA_DIR
 from src.config.logger_config import logger
-from src.preprocessing.cleaning_preprocesses import RemoveFirstLeagueMatch, RemoveWrongOutcome
+from src.preprocessing.cleaning_preprocesses import cleaning_pipeline
 from src.preprocessing.data_retriever import DataRetriever
 from src.preprocessing.model_preprocessing import feature_eng_pipeline, fit_and_process_data
 from src.preprocessing.utils import get_training_test_sets
@@ -34,11 +34,8 @@ def get_raw_data(context):
 @solid
 def basic_preprocessing(context, results, general, home, away):
     logger.info('Data Preparation Pipeline: Basic Preprocessing')
-    first_league_match_remover = RemoveFirstLeagueMatch()
-    remove_wrong_outcome = RemoveWrongOutcome()
-
-    results = first_league_match_remover(results)
-    results = remove_wrong_outcome(results)
+    clean_pipeline = cleaning_pipeline()
+    results = clean_pipeline(results)
 
     feature_pipeline = get_feature_pipeline(general, home, away)
     data = feature_pipeline(results)
