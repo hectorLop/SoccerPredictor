@@ -73,7 +73,7 @@ def preprocess_for_inference(results_df, general_df, home_df, away_df):
     data.iloc[:, 6:] = data.iloc[:, 6:].astype(int)
 
     data = preprocesser_pipeline.transform(data)
-    data = data.drop(['results_id', 'created_on'], axis=1)
+    data = data.drop(['created_on'], axis=1)
 
     teams = (results_df['team_1'].values, results_df['team_2'].values)
 

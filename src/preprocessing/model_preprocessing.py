@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
@@ -49,7 +49,7 @@ def feature_eng_pipeline() -> Pipeline:
         ('feature_pipeline', feature_pipeline),
         ('feature_selector', FeatureSelector(FEATURES_TO_DROP)),
         ('prep', prep_pipeline),
-        ('feature_store', ToFeatureStore())
+        ('feature_store', ToDataset())
     ])
 
     return pipeline
@@ -88,23 +88,40 @@ def fit_and_process_data(
     logger.info('Preprocessing test data')
     X_test = pipeline.transform(X_test)
 
-    # Rename id columns
-    X_train = X_train.rename(columns={'results_id': 'training_id'})
-    X_test = X_test.rename(columns={'results_id': 'test_id'})
-
     return X_train, X_test, y_train, y_test
 
 class FeatureSelector(BaseEstimator, TransformerMixin):
-    def __init__(self, features):
+    """
+    Remove a list of features from the data
+
+    Arguments
+    ---------
+    features : list of str
+        Features' names
+    
+    Attributes
+    ----------
+    features : list of str
+        Features' names
+    """
+    def __init__(self, features : List[str]):
         self.features = features
     
-    def fit(self, X, y=None):
+    def fit(self, X : pd.DataFrame, y : Optional[np.ndarray] = None) -> object:
         return self
     
-    def transform(self, X, y=None):
+    def transform(
+        self,
+        X : pd.DataFrame,
+        y : Optional[np.ndarray] = None
+        ) -> pd.DataFrame:
         return X.drop(self.features, axis=1)
 
-class ToFeatureStore(BaseEstimator, TransformerMixin):
+class ToDataset(BaseEstimator, TransformerMixin):
+    """
+    Transform a matrix of values into a dataset.
+
+    """
     def __init__(self):
         pass
 
@@ -115,7 +132,7 @@ class ToFeatureStore(BaseEstimator, TransformerMixin):
         # Convert to a dataframe
         X = pd.DataFrame(X, columns=VARIABLES[:-1])
         # Adds an id to be used in the Feature Store
-        X['results_id'] = np.arange(len(X))
+        # X['results_id'] = np.arange(len(X))
         # Adds a timestamp to define the datetime where the features were created
         now = datetime.now()
         X['created_on'] = [datetime(now.year, now.month, now.day)] * len(X)
