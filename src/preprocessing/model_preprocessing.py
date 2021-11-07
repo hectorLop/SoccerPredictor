@@ -121,18 +121,26 @@ class ToDataset(BaseEstimator, TransformerMixin):
     """
     Transform a matrix of values into a dataset.
 
+    Arguments
+    ---------
+    columns : List of str
+        List containing the desired dataset columns.
+
+    Attributes
+    ---------
+    variables : List of str
+        List containing the desired dataset columns.
     """
-    def __init__(self):
-        pass
+    def __init__(self, columns : List[str] = VARIABLES):
+        self.variables = columns
 
     def fit(self, X, y=None):
         return self
     
     def transform(self, X, y=None):
         # Convert to a dataframe
-        X = pd.DataFrame(X, columns=VARIABLES[:-1])
-        # Adds an id to be used in the Feature Store
-        # X['results_id'] = np.arange(len(X))
+        variables = [var for var in self.variables if var != 'outcome']
+        X = pd.DataFrame(X, columns=variables)
         # Adds a timestamp to define the datetime where the features were created
         now = datetime.now()
         X['created_on'] = [datetime(now.year, now.month, now.day)] * len(X)

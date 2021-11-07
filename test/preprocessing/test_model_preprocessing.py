@@ -1,11 +1,21 @@
 import pytest
 import pandas as pd
+import numpy as np
 
-from numpy.testing import assert_almost_equal
-from src.preprocessing.model_preprocessing import feature_eng_pipeline
+from src.preprocessing.model_preprocessing import (
+    feature_eng_pipeline,
+    FeatureSelector,
+    ToDataset,
+    WinRatio,
+    DrawRatio,
+    LossRatio,
+)
 from src.config.config import VARIABLES
 
 def test_model_preprocessing():
+    """
+    Test the model preprocessing pipeline
+    """
     df = pd.read_csv('test/data/results_1999_transformed.csv')
 
     pipeline = feature_eng_pipeline()
@@ -20,4 +30,98 @@ def test_model_preprocessing():
 
     expected_variables = VARIABLES[:-1] + ['created_on']
     
-    assert expected_variables == list(X_trans.columns)
+    assert expected_variables == list(X_trans.columns)    
+
+def test_feature_selector():
+    """
+    Test the FeatureSelector preprocess
+    """
+    data = {
+        'league_match': [10],
+        'home': ['team_1'],
+        'outcome': ['draw'],
+        'season': [2021]
+    }
+    df = pd.DataFrame(data)
+
+    selector = FeatureSelector(['home', 'season'])
+    X_trans = selector.fit_transform(df)
+
+    assert list(X_trans.columns) == ['league_match', 'outcome']
+
+def test_to_dataset():
+    """
+    Test the ToDataset preprocess
+    """
+    data = np.zeros((4, 4))
+    
+    to_dataset = ToDataset(['season', 'wins', 'losses', 'draws', 'outcome'])
+    X = to_dataset.fit_transform(data)
+
+    assert list(X.columns) == ['season', 'wins', 'losses', 'draws', 'created_on']
+
+def test_win_ratio():
+    """
+    Test the WinRatio preprocess
+    """
+    data = {
+        'league_match': [10],
+        'home_wins_t1': [10],
+        'home_wins_t2': [10],
+        'away_wins_t1': [10],
+        'away_wins_t2': [10],
+    }
+
+    df = pd.DataFrame(data)
+
+    win_ratio = WinRatio()
+    X_trans = win_ratio.fit_transform(df)
+
+    assert X_trans['home_win_ratio_t1'].values == 1.0
+    assert X_trans['home_win_ratio_t2'].values == 1.0
+    assert X_trans['away_win_ratio_t1'].values == 1.0
+    assert X_trans['away_win_ratio_t2'].values == 1.0
+
+def test_draw_ratio():
+    """
+    Test the DrawRatio preprocess
+    """
+    data = {
+        'league_match': [10],
+        'home_draws_t1': [10],
+        'home_draws_t2': [10],
+        'away_draws_t1': [10],
+        'away_draws_t2': [10],
+    }
+
+    df = pd.DataFrame(data)
+
+    win_ratio = DrawRatio()
+    X_trans = win_ratio.fit_transform(df)
+
+    assert X_trans['home_draw_ratio_t1'].values == 1.0
+    assert X_trans['home_draw_ratio_t2'].values == 1.0
+    assert X_trans['away_draw_ratio_t1'].values == 1.0
+    assert X_trans['away_draw_ratio_t2'].values == 1.0
+
+def test_loss_ratio():
+    """
+    Test the LossRatio preprocess
+    """
+    data = {
+        'league_match': [10],
+        'home_losses_t1': [10],
+        'home_losses_t2': [10],
+        'away_losses_t1': [10],
+        'away_losses_t2': [10],
+    }
+
+    df = pd.DataFrame(data)
+
+    win_ratio = LossRatio()
+    X_trans = win_ratio.fit_transform(df)
+
+    assert X_trans['home_loss_ratio_t1'].values == 1.0
+    assert X_trans['home_loss_ratio_t2'].values == 1.0
+    assert X_trans['away_loss_ratio_t1'].values == 1.0
+    assert X_trans['away_loss_ratio_t2'].values == 1.0
