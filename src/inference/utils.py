@@ -69,9 +69,6 @@ def preprocess_for_inference(results_df, general_df, home_df, away_df):
 
     data = data.drop('outcome', axis=1)
 
-    # There are columns that must be casted to integers
-    data.iloc[:, 6:] = data.iloc[:, 6:].astype(int)
-
     data = preprocesser_pipeline.transform(data)
     data = data.drop(['created_on'], axis=1)
 
@@ -105,9 +102,9 @@ def parse_preds(preds, teams, league_match):
             'outcome': outcome
         }
 
-    s3_data = json.dumps(data)
-    bucket = os.getenv('AWS_BUCKET')
-    s3_client = boto3.client('s3')
-    s3_client.put_object(Body=s3_data,
-                        Bucket=bucket,
-                        Key='predictions/predictions.json')
+    # s3_data = json.dumps(data)
+    # bucket = os.getenv('AWS_BUCKET')
+    # s3_client = boto3.client('s3')
+    # s3_client.put_object(Body=s3_data,
+    #                     Bucket=bucket,
+    #                     Key='predictions/predictions.json')
