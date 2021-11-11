@@ -53,12 +53,14 @@ def test_to_dataset():
     """
     Test the ToDataset preprocess
     """
-    data = np.zeros((4, 4))
+    data = np.zeros((4, len(VARIABLES)-1))
     
-    to_dataset = ToDataset(['season', 'wins', 'losses', 'draws', 'outcome'])
+    to_dataset = ToDataset()
     X = to_dataset.fit_transform(data)
 
-    assert list(X.columns) == ['season', 'wins', 'losses', 'draws', 'created_on']
+    expected_vars = [var for var in VARIABLES if var != 'outcome']
+
+    assert list(X.columns) == (expected_vars + ['created_on'])
 
 def test_win_ratio():
     """

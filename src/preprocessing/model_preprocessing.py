@@ -139,7 +139,8 @@ class ToDataset(BaseEstimator, TransformerMixin):
     
     def transform(self, X, y=None):
         # Convert to a dataframe
-        variables = [var for var in self.variables if var != 'outcome']
+        variables = [var for var in VARIABLES if var != 'outcome']
+
         X = pd.DataFrame(X, columns=variables)
         # Adds a timestamp to define the datetime where the features were created
         now = datetime.now()

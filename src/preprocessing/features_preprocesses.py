@@ -133,7 +133,7 @@ class ComputeWins(FeaturePreprocess):
     def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
         data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[5]
+        return int(data[5])
 
 class ComputeDraws(FeaturePreprocess):
     def __init__(self, *args):
@@ -142,7 +142,7 @@ class ComputeDraws(FeaturePreprocess):
     def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
         data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[6]
+        return int(data[6])
 
 class ComputeLosses(FeaturePreprocess):
     def __init__(self, *args):
@@ -151,7 +151,7 @@ class ComputeLosses(FeaturePreprocess):
     def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
         data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[7]
+        return int(data[7])
 
 class ComputeGoalsScored(FeaturePreprocess):
     def __init__(self, *args):
@@ -160,7 +160,7 @@ class ComputeGoalsScored(FeaturePreprocess):
     def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
         data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[8]
+        return int(data[8])
 
 class ComputeGoalsConceded(FeaturePreprocess):
     def __init__(self, *args):
@@ -169,7 +169,7 @@ class ComputeGoalsConceded(FeaturePreprocess):
     def _compute_feature(self, df_row: np.ndarray, team: str) -> int:
         data = self._get_team_data(df_row, self.ranking_df, team)
         
-        return data[9]
+        return int(data[9])
 
 def get_feature_pipeline(general, home, away):
     # Compute general, home and away wins
